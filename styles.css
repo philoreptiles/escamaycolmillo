@@ -1,0 +1,199 @@
+/* ==========================================
+   ESTILOS EXCLUSIVOS: ESCAMA & COLMILLO
+   ========================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif; /* Fuente del cuerpo */
+}
+
+body {
+  background-color: #0d0d0d; /* Negro profundo */
+  color: #e6e6e6;
+  line-height: 1.5;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+/* --- HEADER CON ESTILO LUXURY --- */
+.header {
+  background-color: #141414;
+  border-bottom: 2px solid #b38b0a; /* Línea de acento color cobre/oro viejo */
+  padding: 18px 5%;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+/* Tipografía de marca (Cinzel para tono elegante y fuerte) */
+.logo h2 {
+  font-family: 'Cinzel', serif;
+  color: #ffffff;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+}
+
+.pimvs-tag {
+  font-size: 0.7rem;
+  color: #888;
+  letter-spacing: 1px;
+}
+
+.btn-wa {
+  background-color: #a87232; /* Tono cobre elegante en lugar de verde brillante */
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 4px; /* Esquinas rectas y afiladas para tono sobrio */
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* --- HERO BANNER --- */
+.hero {
+  text-align: center;
+  padding: 50px 20px;
+  background: radial-gradient(circle, #1a1510 0%, #0d0d0d 100%);
+  border-bottom: 1px solid #222;
+}
+
+.hero h1 {
+  font-family: 'Cinzel', serif;
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 0.95rem;
+  color: #999;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* --- GRILLA --- */
+.catalogo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+/* --- TARJETAS TIPO GALERÍA --- */
+.card {
+  background-color: #141414;
+  border-radius: 4px; /* Sin bordes redondos exagerados */
+  overflow: hidden;
+  border: 1px solid #262626;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  position: relative;
+}
+
+.card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Badges de estatus */
+.status-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 10px;
+  border-radius: 2px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.status-badge.disponible {
+  background-color: #25d366;
+  color: #000;
+}
+
+.status-badge.reservado {
+  background-color: #e5a93c;
+  color: #000;
+}
+
+/* Cuerpo de la tarjeta */
+.card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.especie {
+  font-size: 0.75rem;
+  color: #a87232;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.card-body h3 {
+  font-size: 1.15rem;
+  margin: 6px 0 12px 0;
+  color: #fff;
+}
+
+.detalles-list {
+  list-style: none;
+  font-size: 0.85rem;
+  color: #aaa;
+  margin-bottom: 20px;
+}
+
+.detalles-list li {
+  margin-bottom: 5px;
+}
+
+.card-footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 15px;
+  border-top: 1px solid #222;
+}
+
+.precio {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.btn-card-wa {
+  background-color: #25d366;
+  color: #000;
+  padding: 8px 14px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.8rem;
+}

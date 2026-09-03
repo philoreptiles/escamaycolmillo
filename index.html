@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Escama & Colmillo | Herpetocultura de Selección</title>
+  
+  <!-- Tipografías de Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Encabezado -->
+  <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <h2>ESCAMA & COLMILLO</h2>
+        <span class="pimvs-tag">PIMVS-SEMARNAT-HERP-089-26</span>
+      </div>
+      <a href="https://wa.me/5215512345678" target="_blank" class="btn-wa">
+        Atención Directa
+      </a>
+    </div>
+  </header>
+
+  <!-- Banner -->
+  <section class="hero">
+    <h1>Colección Privada & Disponibles</h1>
+    <p>Crianza de selección genética en Boa imperator y Python regius. Envíos autorizados con nota de remisión.</p>
+  </section>
+
+  <!-- Grilla del Catálogo Dinámico -->
+  <main class="container">
+    <div id="catalogo-grid" class="catalogo-grid">
+      <!-- Este mensaje cambiará en cuanto app.js lea la hoja de Google Sheets -->
+      <p class="cargando">Cargando ejemplares disponibles...</p>
+    </div>
+  </main>
+
+  <!-- VÍNCULO ESENCIAL: Carga la lógica de Google Sheets -->
+  <script src="app.js"></script>
+
+</body>
+</html>
