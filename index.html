@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="no-referrer">
   <title>Escama & Colmillo | Herpetocultura de Selección</title>
   
   <!-- Tipografías de Google Fonts -->
@@ -33,11 +34,22 @@
     <p>Crianza de selección genética en Boa imperator y Python regius. Envíos autorizados con nota de remisión.</p>
   </section>
 
-<!-- Grilla del Catálogo Dinámico -->
+  <!-- Grilla del Catálogo Dinámico -->
   <main class="container">
 
     <!-- BARRA DE FILTROS Y ORDENAMIENTO -->
     <div class="filtros-bar">
+      <div class="filtro-grupo">
+        <label for="filtro-estatus">Disponibilidad</label>
+        <select id="filtro-estatus" class="filtro-select">
+          <option value="todos">Todos los estatus</option>
+          <option value="disponible">Disponible</option>
+          <option value="apartado">Apartado</option>
+          <option value="vendido">Vendido</option>
+          <option value="holdback">Holdback</option>
+        </select>
+      </div>
+
       <div class="filtro-grupo">
         <label for="filtro-sexo">Sexo</label>
         <select id="filtro-sexo" class="filtro-select">
@@ -48,10 +60,9 @@
       </div>
 
       <div class="filtro-grupo">
-        <label for="filtro-nacimiento">Año de Nacimiento</label>
+        <label for="filtro-nacimiento">Nacimiento</label>
         <select id="filtro-nacimiento" class="filtro-select">
           <option value="todos">Todos los años</option>
-          <!-- Se poblará automáticamente con los años disponibles en Sheets -->
         </select>
       </div>
 
@@ -66,7 +77,7 @@
       </div>
 
       <div class="filtro-grupo">
-        <label for="orden-precio">Ordenar por Precio</label>
+        <label for="orden-precio">Ordenar Precio</label>
         <select id="orden-precio" class="filtro-select">
           <option value="predeterminado">Predeterminado</option>
           <option value="menor-mayor">De menor a mayor</option>
@@ -80,7 +91,6 @@
     </div>
   </main>
 
-  <!-- VÍNCULO ESENCIAL: Carga la lógica de Google Sheets -->
   <script src="app.js"></script>
 
 </body>

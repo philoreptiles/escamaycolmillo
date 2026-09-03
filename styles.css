@@ -1,5 +1,6 @@
 /* ==========================================
    ESTILOS EXCLUSIVOS: ESCAMA & COLMILLO
+   Paleta: Rojo (Principal), Blanco (Secundario), Cobre (Terciario)
    ========================================== */
 
 * {
@@ -11,7 +12,7 @@
 
 body {
   background-color: #0d0d0d;
-  color: #e6e6e6;
+  color: #ffffff; /* Blanco Secundario */
   line-height: 1.5;
 }
 
@@ -25,7 +26,7 @@ body {
 /* --- HEADER --- */
 .header {
   background-color: #141414;
-  border-bottom: 2px solid #b38b0a;
+  border-bottom: 2px solid #a61c1c; /* Rojo Principal */
   padding: 18px 5%;
 }
 
@@ -41,20 +42,20 @@ body {
 
 .logo h2 {
   font-family: 'Cinzel', serif;
-  color: #ffffff;
+  color: #ffffff; /* Blanco Secundario */
   font-size: 1.5rem;
   letter-spacing: 2px;
 }
 
 .pimvs-tag {
   font-size: 0.7rem;
-  color: #888;
+  color: #a61c1c; /* Rojo */
   letter-spacing: 1px;
 }
 
 .btn-wa {
-  background-color: #a87232;
-  color: #fff;
+  background-color: #a61c1c; /* Rojo Principal */
+  color: #ffffff;
   padding: 10px 20px;
   border-radius: 4px;
   text-decoration: none;
@@ -62,39 +63,119 @@ body {
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 1px;
+  transition: background-color 0.2s ease;
+}
+
+.btn-wa:hover {
+  background-color: #801212;
 }
 
 /* --- HERO BANNER --- */
 .hero {
   text-align: center;
   padding: 50px 20px;
-  background: radial-gradient(circle, #1a1510 0%, #0d0d0d 100%);
-  border-bottom: 1px solid #222;
+  background: radial-gradient(circle, #1a0a0a 0%, #0d0d0d 100%);
+  border-bottom: 1px solid #262626;
 }
 
 .hero h1 {
   font-family: 'Cinzel', serif;
   font-size: 2rem;
-  color: #fff;
+  color: #ffffff;
   margin-bottom: 10px;
 }
 
 .hero p {
   font-size: 0.95rem;
-  color: #999;
+  color: #cccccc;
   max-width: 600px;
   margin: 0 auto;
 }
 
-/* --- GRILLA --- */
+/* --- BARRA DE FILTROS --- */
+.filtros-bar {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+  background-color: #141414;
+  padding: 18px 20px;
+  border: 1px solid #262626;
+  border-radius: 4px;
+  margin-bottom: 25px;
+}
+
+.filtro-grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.filtro-grupo label {
+  font-size: 0.72rem;
+  color: #a61c1c; /* Rojo */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.filtro-select {
+  background-color: #0d0d0d;
+  color: #ffffff;
+  border: 1px solid #333333;
+  padding: 10px 8px;
+  border-radius: 4px;
+  font-size: 0.82rem;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+  width: 100%;
+  
+  /* Eliminación total de contornos, subrayados y destellos en focus */
+  outline: none !important;
+  box-shadow: none !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  
+  /* Flecha personalizada limpia */
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a61c1c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 14px;
+  padding-right: 28px;
+  transition: border-color 0.2s ease;
+}
+
+.filtro-select:focus,
+.filtro-select:hover {
+  border-color: #a61c1c; /* Borde discreto en Rojo al interactuar */
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.filtro-select option {
+  background-color: #141414;
+  color: #ffffff;
+  padding: 8px;
+}
+
+/* --- GRILLA Y TARJETAS --- */
 .catalogo-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 25px;
-  margin-top: 30px;
+  margin-top: 10px;
 }
 
-/* --- TARJETAS --- */
+.cargando {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #a61c1c;
+  font-weight: 600;
+  padding: 40px 0;
+}
+
 .card {
   background-color: #141414;
   border-radius: 4px;
@@ -102,12 +183,12 @@ body {
   border: 1px solid #262626;
   display: flex;
   flex-direction: column;
-  height: 100%; /* Forzar altura idéntica en la misma fila */
+  height: 100%;
 }
 
 .card-img {
   width: 100%;
-  aspect-ratio: 1 / 1; /* Cuadrado perfecto para uniformidad de fotos */
+  aspect-ratio: 1 / 1;
   position: relative;
   background-color: #0d0d0d;
 }
@@ -118,7 +199,7 @@ body {
   object-fit: cover;
 }
 
-/* Badges de estatus */
+/* Estatus Badges */
 .status-badge {
   position: absolute;
   top: 12px;
@@ -132,26 +213,26 @@ body {
 }
 
 .status-badge.disponible {
-  background-color: #25d366;
-  color: #000;
+  background-color: #25d366; /* Verde */
+  color: #000000;
 }
 
 .status-badge.apartado {
-  background-color: #e5a93c;
-  color: #000;
+  background-color: #b87333; /* Cobre Terciario */
+  color: #ffffff;
 }
 
 .status-badge.vendido {
-  background-color: #c0392b;
-  color: #fff;
+  background-color: #a61c1c; /* Rojo */
+  color: #ffffff;
 }
 
 .status-badge.holdback {
-  background-color: #4a69bd;
-  color: #fff;
+  background-color: #b39ddb; /* Morado pastel */
+  color: #141414;
 }
 
-/* Cuerpo de la tarjeta */
+/* Cuerpo de Tarjeta */
 .card-body {
   padding: 20px;
   display: flex;
@@ -161,7 +242,7 @@ body {
 
 .especie {
   font-size: 0.75rem;
-  color: #a87232;
+  color: #a61c1c; /* Rojo */
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 600;
@@ -170,13 +251,13 @@ body {
 .card-body h3 {
   font-size: 1.15rem;
   margin: 6px 0 12px 0;
-  color: #fff;
+  color: #ffffff; /* Blanco Secundario */
 }
 
 .detalles-list {
   list-style: none;
   font-size: 0.85rem;
-  color: #aaa;
+  color: #cccccc;
   margin-bottom: 20px;
 }
 
@@ -185,79 +266,37 @@ body {
 }
 
 .card-footer {
-  margin-top: auto; /* Empuja el precio y botón al fondo exacto */
+  margin-top: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-top: 15px;
-  border-top: 1px solid #222;
+  border-top: 1px solid #222222;
 }
 
 .precio {
   font-size: 1.2rem;
   font-weight: 700;
-  color: #fff;
+  color: #ffffff;
 }
 
 .btn-card-wa {
-  background-color: #25d366;
-  color: #000;
+  background-color: #a61c1c; /* Rojo Principal */
+  color: #ffffff;
   padding: 8px 14px;
   border-radius: 4px;
   text-decoration: none;
   font-weight: 700;
   font-size: 0.8rem;
+  transition: background-color 0.2s ease;
 }
 
-/* --- BARRA DE FILTROS --- */
-.filtros-bar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #141414;
-  padding: 18px 20px;
-  border: 1px solid #262626;
-  border-radius: 4px;
-  margin-bottom: 25px;
+.btn-card-wa:hover {
+  background-color: #801212;
 }
 
-.filtro-grupo {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  flex: 1;
-  min-width: 180px;
-}
-
-.filtro-grupo label {
-  font-size: 0.75rem;
-  color: #a87232;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.filtro-select {
-  background-color: #0d0d0d;
-  color: #e6e6e6;
-  border: 1px solid #333;
-  padding: 10px 12px;
-  border-radius: 4px;
-  font-size: 0.85rem;
-  font-family: 'Montserrat', sans-serif;
-  outline: none;
-  cursor: pointer;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.filtro-select:focus {
-  border-color: #a87232;
-  box-shadow: 0 0 5px rgba(168, 114, 50, 0.3);
-}
-
-.filtro-select option {
-  background-color: #141414;
-  color: #fff;
+@media (max-width: 900px) {
+  .filtros-bar {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
 }

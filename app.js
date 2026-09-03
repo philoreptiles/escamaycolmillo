@@ -5,7 +5,7 @@
 const SHEETS_API_URL = 'https://script.google.com/macros/s/AKfycbyA5ofLcZQd9wEfEdNsAZNuH9EHP_Q0B4eVFNMcW-SQtInZbpp-6WTRdz9EfhNgk8jWeg/exec';
 const WHATSAPP_NUMERO = "5215512345678"; 
 
-let todosLosEjemplares = []; // Copia global de los datos de Sheets
+let todosLosEjemplares = [];
 
 /* ==========================================================================
    INICIALIZACIÓN Y EVENTOS
@@ -14,11 +14,11 @@ let todosLosEjemplares = []; // Copia global de los datos de Sheets
 document.addEventListener('DOMContentLoaded', () => {
   cargarEjemplares();
 
-  // Asignación de eventos a cada filtro
-  document.getElementById('filtro-sexo').addEventListener('change', aplicarFiltros);
-  document.getElementById('filtro-nacimiento').addEventListener('change', aplicarFiltros);
-  document.getElementById('filtro-precio').addEventListener('change', aplicarFiltros);
-  document.getElementById('orden-precio').addEventListener('change', aplicarFiltros);
+  // Optimización: Delegación de eventos en la barra contenedora
+  const filtrosBar = document.querySelector('.filtros-bar');
+  if (filtrosBar) {
+    filtrosBar.addEventListener('change', aplicarFiltros);
+  }
 });
 
 /* ==========================================================================
@@ -32,7 +32,6 @@ async function cargarEjemplares() {
     const respuesta = await fetch(SHEETS_API_URL);
     const datos = await respuesta.json();
 
-    // Filtra filas totalmente vacías
     todosLosEjemplares = datos.filter(item => item.id || item.Especie);
 
     poblarFiltroNacimiento(todosLosEjemplares);
@@ -52,12 +51,14 @@ function poblarFiltroNacimiento(ejemplares) {
   const selectNacimiento = document.getElementById('filtro-nacimiento');
   const anosUnicos = [...new Set(ejemplares.map(item => item.Nacimiento).filter(Boolean))].sort((a, b) => b - a);
 
+  const fragmento = document.createDocumentFragment();
   anosUnicos.forEach(ano => {
     const option = document.createElement('option');
     option.value = ano;
     option.textContent = ano;
-    selectNacimiento.appendChild(option);
+    fragmento.appendChild(option);
   });
+  selectNacimiento.appendChild(fragmento);
 }
 
 /* ==========================================================================
@@ -71,19 +72,17 @@ function parsearPrecio(precioRaw) {
 }
 
 function aplicarFiltros() {
+  const estatusVal = document.getElementById('filtro-estatus').value;
   const sexoVal = document.getElementById('filtro-sexo').value;
   const nacimientoVal = document.getElementById('filtro-nacimiento').value;
   const rangoPrecioVal = document.getElementById('filtro-precio').value;
   const ordenPrecioVal = document.getElementById('orden-precio').value;
 
   let resultado = todosLosEjemplares.filter(item => {
-    // 1. Filtro por Sexo
+    const coincideEstatus = estatusVal === 'todos' || (item.Estatus && item.Estatus.toLowerCase().trim() === estatusVal.toLowerCase());
     const coincideSexo = sexoVal === 'todos' || (item.Sexo && item.Sexo.toLowerCase() === sexoVal.toLowerCase());
-
-    // 2. Filtro por Nacimiento
     const coincideNacimiento = nacimientoVal === 'todos' || String(item.Nacimiento) === String(nacimientoVal);
 
-    // 3. Filtro por Rango de Precio
     const precioNum = parsearPrecio(item.Precio);
     let coincidePrecio = true;
 
@@ -95,10 +94,9 @@ function aplicarFiltros() {
       coincidePrecio = precioNum > 10000;
     }
 
-    return coincideSexo && coincideNacimiento && coincidePrecio;
+    return coincideEstatus && coincideSexo && coincideNacimiento && coincidePrecio;
   });
 
-  // 4. Ordenamiento por Precio
   if (ordenPrecioVal === 'menor-mayor') {
     resultado.sort((a, b) => parsearPrecio(a.Precio) - parsearPrecio(b.Precio));
   } else if (ordenPrecioVal === 'mayor-menor') {
@@ -109,7 +107,7 @@ function aplicarFiltros() {
 }
 
 /* ==========================================================================
-   RENDERIZAR EN PANTALLA
+   RENDERIZAR EN PANTALLA (Optimizado con DocumentFragment)
    ========================================================================== */
 
 function renderizarCatalogo(ejemplares) {
@@ -120,6 +118,8 @@ function renderizarCatalogo(ejemplares) {
     contenedor.innerHTML = '<p class="cargando">No se encontraron ejemplares con los filtros seleccionados.</p>';
     return;
   }
+
+  const fragmento = document.createDocumentFragment();
 
   ejemplares.forEach(item => {
     const tarjeta = document.createElement('article');
@@ -137,7 +137,7 @@ function renderizarCatalogo(ejemplares) {
 
     tarjeta.innerHTML = `
       <div class="card-img">
-        <img src="${urlImagen}" alt="${item['Genética']}" loading="lazy" referrerpolicy="no-referrer">
+        <img src="${urlImagen}" alt="${item['Genética'] || 'Ejemplar'}" loading="lazy" referrerpolicy="no-referrer">
         <span class="status-badge ${estatusClase}">${item.Estatus}</span>
       </div>
 
@@ -160,6 +160,8 @@ function renderizarCatalogo(ejemplares) {
       </div>
     `;
 
-    contenedor.appendChild(tarjeta);
+    fragmento.appendChild(tarjeta);
   });
+
+  contenedor.appendChild(fragmento);
 }
