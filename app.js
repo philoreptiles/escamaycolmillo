@@ -6,6 +6,8 @@ const SHEETS_API_URL = 'https://script.google.com/macros/s/AKfycbyA5ofLcZQd9wEfE
 const WHATSAPP_NUMERO = "5215512345678"; 
 
 let todosLosEjemplares = [];
+let ejemplaresFiltrados = [];
+let indiceActualModal = 0;
 
 /* ==========================================================================
    INICIALIZACIÓN Y EVENTOS
@@ -14,11 +16,54 @@ let todosLosEjemplares = [];
 document.addEventListener('DOMContentLoaded', () => {
   cargarEjemplares();
 
-  // Optimización: Delegación de eventos en la barra contenedora
+  // Delegación de eventos en filtros
   const filtrosBar = document.querySelector('.filtros-bar');
   if (filtrosBar) {
     filtrosBar.addEventListener('change', aplicarFiltros);
   }
+
+  // Eventos para el Modal
+  const modal = document.getElementById('modal-imagen');
+  const btnCerrar = document.querySelector('.cerrar-modal');
+  const btnPrev = document.getElementById('modal-prev');
+  const btnNext = document.getElementById('modal-next');
+
+  if (btnCerrar) {
+    btnCerrar.addEventListener('click', () => modal.classList.remove('activo'));
+  }
+
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.classList.remove('activo');
+    });
+  }
+
+  if (btnPrev) {
+    btnPrev.addEventListener('click', () => navegarModal(-1));
+  }
+
+  if (btnNext) {
+    btnNext.addEventListener('click', () => navegarModal(1));
+  }
+
+  // Navegación con teclado (Flechas izq/der y Escape)
+  document.addEventListener('keydown', (e) => {
+    if (!modal || !modal.classList.contains('activo')) return;
+
+    if (e.key === 'ArrowLeft') navegarModal(-1);
+    if (e.key === 'ArrowRight') navegarModal(1);
+    if (e.key === 'Escape') modal.classList.remove('activo');
+  });
+
+  // Delegación de clic sobre la imagen para abrir modal
+  document.addEventListener('click', (e) => {
+    if (e.target && e.target.classList.contains('img-ampliable')) {
+      const index = parseInt(e.target.dataset.index, 10);
+      if (!isNaN(index)) {
+        mostrarModalPorIndice(index);
+      }
+    }
+  });
 });
 
 /* ==========================================================================
@@ -62,13 +107,19 @@ function poblarFiltroNacimiento(ejemplares) {
 }
 
 /* ==========================================================================
-   LÓGICA DE FILTRADO Y ORDENAMIENTO
+   LÓGICA DE FILTRADO Y FORMATO DE PRECIOS
    ========================================================================== */
 
 function parsearPrecio(precioRaw) {
   if (!precioRaw) return 0;
   const limpio = String(precioRaw).replace(/[^0-9]/g, '');
   return parseFloat(limpio) || 0;
+}
+
+// Convierte números como 2500 a "2,500"
+function formatearPrecio(precioRaw) {
+  const numero = parsearPrecio(precioRaw);
+  return numero.toLocaleString('en-US');
 }
 
 function aplicarFiltros() {
@@ -78,7 +129,7 @@ function aplicarFiltros() {
   const rangoPrecioVal = document.getElementById('filtro-precio').value;
   const ordenPrecioVal = document.getElementById('orden-precio').value;
 
-  let resultado = todosLosEjemplares.filter(item => {
+  ejemplaresFiltrados = todosLosEjemplares.filter(item => {
     const coincideEstatus = estatusVal === 'todos' || (item.Estatus && item.Estatus.toLowerCase().trim() === estatusVal.toLowerCase());
     const coincideSexo = sexoVal === 'todos' || (item.Sexo && item.Sexo.toLowerCase() === sexoVal.toLowerCase());
     const coincideNacimiento = nacimientoVal === 'todos' || String(item.Nacimiento) === String(nacimientoVal);
@@ -98,16 +149,16 @@ function aplicarFiltros() {
   });
 
   if (ordenPrecioVal === 'menor-mayor') {
-    resultado.sort((a, b) => parsearPrecio(a.Precio) - parsearPrecio(b.Precio));
+    ejemplaresFiltrados.sort((a, b) => parsearPrecio(a.Precio) - parsearPrecio(b.Precio));
   } else if (ordenPrecioVal === 'mayor-menor') {
-    resultado.sort((a, b) => parsearPrecio(b.Precio) - parsearPrecio(a.Precio));
+    ejemplaresFiltrados.sort((a, b) => parsearPrecio(b.Precio) - parsearPrecio(a.Precio));
   }
 
-  renderizarCatalogo(resultado);
+  renderizarCatalogo(ejemplaresFiltrados);
 }
 
 /* ==========================================================================
-   RENDERIZAR EN PANTALLA (Optimizado con DocumentFragment)
+   RENDERIZAR EN PANTALLA
    ========================================================================== */
 
 function renderizarCatalogo(ejemplares) {
@@ -121,7 +172,7 @@ function renderizarCatalogo(ejemplares) {
 
   const fragmento = document.createDocumentFragment();
 
-  ejemplares.forEach(item => {
+  ejemplares.forEach((item, index) => {
     const tarjeta = document.createElement('article');
     tarjeta.className = 'card';
 
@@ -131,13 +182,19 @@ function renderizarCatalogo(ejemplares) {
       urlImagen = `https://i.imgur.com/${imgurId}.png`;
     }
 
+    const precioFormateado = formatearPrecio(item.Precio);
     const textoMensaje = `Hola, me interesa el ejemplar ${item.id}`;
     const mensajeWA = encodeURIComponent(textoMensaje);
     const estatusClase = item.Estatus ? item.Estatus.toLowerCase().trim() : '';
 
     tarjeta.innerHTML = `
       <div class="card-img">
-        <img src="${urlImagen}" alt="${item['Genética'] || 'Ejemplar'}" loading="lazy" referrerpolicy="no-referrer">
+        <img src="${urlImagen}" 
+             alt="${item['Genética'] || 'Ejemplar'}" 
+             loading="lazy" 
+             referrerpolicy="no-referrer"
+             class="img-ampliable"
+             data-index="${index}">
         <span class="status-badge ${estatusClase}">${item.Estatus}</span>
       </div>
 
@@ -152,7 +209,7 @@ function renderizarCatalogo(ejemplares) {
         </ul>
 
         <div class="card-footer">
-          <span class="precio">$${item.Precio} MXN</span>
+          <span class="precio">$${precioFormateado} MXN</span>
           <a href="https://wa.me/${WHATSAPP_NUMERO}?text=${mensajeWA}" target="_blank" class="btn-card-wa">
             Consultar
           </a>
@@ -164,4 +221,52 @@ function renderizarCatalogo(ejemplares) {
   });
 
   contenedor.appendChild(fragmento);
+}
+
+/* ==========================================================================
+   MÓDULO LIGHTBOX CON NAVEGACIÓN
+   ========================================================================== */
+
+function mostrarModalPorIndice(index) {
+  if (!ejemplaresFiltrados.length || index < 0 || index >= ejemplaresFiltrados.length) return;
+
+  indiceActualModal = index;
+  const item = ejemplaresFiltrados[indiceActualModal];
+
+  let urlImagen = item.imagen_url ? item.imagen_url.trim() : '';
+  if (urlImagen.includes('imgur.com') && !urlImagen.includes('i.imgur.com')) {
+    const imgurId = urlImagen.split('/').filter(Boolean).pop();
+    urlImagen = `https://i.imgur.com/${imgurId}.png`;
+  }
+
+  const modal = document.getElementById('modal-imagen');
+  const modalImg = document.getElementById('modal-img-target');
+  const modalCaption = document.getElementById('modal-caption');
+
+  if (!modal || !modalImg || !modalCaption) return;
+
+  modalImg.src = urlImagen;
+  modalCaption.innerHTML = `
+    <strong>ID:</strong> ${item.id || 'N/A'} &nbsp;|&nbsp; 
+    <strong>Sexo:</strong> ${item.Sexo || 'N/A'} &nbsp;|&nbsp; 
+    <strong>Año de Nacimiento:</strong> ${item.Nacimiento || 'N/A'} &nbsp;|&nbsp; 
+    <strong>Precio:</strong> $${formatearPrecio(item.Precio)} MXN &nbsp;|&nbsp; 
+    <strong>Disponibilidad:</strong> ${item.Estatus || 'N/A'}
+  `;
+
+  modal.classList.add('activo');
+}
+
+function navegarModal(direccion) {
+  if (!ejemplaresFiltrados.length) return;
+
+  let nuevoIndice = indiceActualModal + direccion;
+
+  if (nuevoIndice < 0) {
+    nuevoIndice = ejemplaresFiltrados.length - 1;
+  } else if (nuevoIndice >= ejemplaresFiltrados.length) {
+    nuevoIndice = 0;
+  }
+
+  mostrarModalPorIndice(nuevoIndice);
 }

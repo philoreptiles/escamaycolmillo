@@ -22,6 +22,10 @@
         <h2>ESCAMA & COLMILLO</h2>
         <span class="pimvs-tag">PIMVS-SEMARNAT-HERP-089-26</span>
       </div>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link active">Catálogo</a>
+        <a href="nosotros.html" class="nav-link">Sobre Nosotros</a>
+      </nav>
       <a href="https://wa.me/5215512345678" target="_blank" class="btn-wa">
         Atención Directa
       </a>
@@ -90,6 +94,20 @@
       <p class="cargando">Cargando ejemplares disponibles...</p>
     </div>
   </main>
+
+  <!-- MODAL LIGHTBOX CON NAVEGACIÓN -->
+  <div id="modal-imagen" class="modal-lightbox">
+    <span class="cerrar-modal">&times;</span>
+    
+    <button id="modal-prev" class="modal-nav modal-prev" aria-label="Anterior">&#10094;</button>
+    
+    <div class="modal-body">
+      <img id="modal-img-target" src="" alt="Ejemplar ampliado">
+      <div id="modal-caption" class="modal-caption"></div>
+    </div>
+
+    <button id="modal-next" class="modal-nav modal-next" aria-label="Siguiente">&#10095;</button>
+  </div>
 
   <script src="app.js"></script>
 
