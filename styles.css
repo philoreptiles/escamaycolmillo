@@ -6,11 +6,11 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Montserrat', sans-serif; /* Fuente del cuerpo */
+  font-family: 'Montserrat', sans-serif;
 }
 
 body {
-  background-color: #0d0d0d; /* Negro profundo */
+  background-color: #0d0d0d;
   color: #e6e6e6;
   line-height: 1.5;
 }
@@ -22,10 +22,10 @@ body {
   padding: 20px 0;
 }
 
-/* --- HEADER CON ESTILO LUXURY --- */
+/* --- HEADER --- */
 .header {
   background-color: #141414;
-  border-bottom: 2px solid #b38b0a; /* Línea de acento color cobre/oro viejo */
+  border-bottom: 2px solid #b38b0a;
   padding: 18px 5%;
 }
 
@@ -39,7 +39,6 @@ body {
   gap: 15px;
 }
 
-/* Tipografía de marca (Cinzel para tono elegante y fuerte) */
 .logo h2 {
   font-family: 'Cinzel', serif;
   color: #ffffff;
@@ -54,10 +53,10 @@ body {
 }
 
 .btn-wa {
-  background-color: #a87232; /* Tono cobre elegante en lugar de verde brillante */
+  background-color: #a87232;
   color: #fff;
   padding: 10px 20px;
-  border-radius: 4px; /* Esquinas rectas y afiladas para tono sobrio */
+  border-radius: 4px;
   text-decoration: none;
   font-weight: 600;
   font-size: 0.85rem;
@@ -90,25 +89,27 @@ body {
 /* --- GRILLA --- */
 .catalogo-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 25px;
   margin-top: 30px;
 }
 
-/* --- TARJETAS TIPO GALERÍA --- */
+/* --- TARJETAS --- */
 .card {
   background-color: #141414;
-  border-radius: 4px; /* Sin bordes redondos exagerados */
+  border-radius: 4px;
   overflow: hidden;
   border: 1px solid #262626;
   display: flex;
   flex-direction: column;
+  height: 100%; /* Forzar altura idéntica en la misma fila */
 }
 
 .card-img {
   width: 100%;
-  aspect-ratio: 4/3;
+  aspect-ratio: 1 / 1; /* Cuadrado perfecto para uniformidad de fotos */
   position: relative;
+  background-color: #0d0d0d;
 }
 
 .card-img img {
@@ -135,9 +136,19 @@ body {
   color: #000;
 }
 
-.status-badge.reservado {
+.status-badge.apartado {
   background-color: #e5a93c;
   color: #000;
+}
+
+.status-badge.vendido {
+  background-color: #c0392b;
+  color: #fff;
+}
+
+.status-badge.holdback {
+  background-color: #4a69bd;
+  color: #fff;
 }
 
 /* Cuerpo de la tarjeta */
@@ -174,7 +185,7 @@ body {
 }
 
 .card-footer {
-  margin-top: auto;
+  margin-top: auto; /* Empuja el precio y botón al fondo exacto */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -183,7 +194,7 @@ body {
 }
 
 .precio {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: #fff;
 }
