@@ -208,3 +208,56 @@ body {
   font-weight: 700;
   font-size: 0.8rem;
 }
+
+/* --- BARRA DE FILTROS --- */
+.filtros-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #141414;
+  padding: 18px 20px;
+  border: 1px solid #262626;
+  border-radius: 4px;
+  margin-bottom: 25px;
+}
+
+.filtro-grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 180px;
+}
+
+.filtro-grupo label {
+  font-size: 0.75rem;
+  color: #a87232;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.filtro-select {
+  background-color: #0d0d0d;
+  color: #e6e6e6;
+  border: 1px solid #333;
+  padding: 10px 12px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-family: 'Montserrat', sans-serif;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.filtro-select:focus {
+  border-color: #a87232;
+  box-shadow: 0 0 5px rgba(168, 114, 50, 0.3);
+}
+
+.filtro-select option {
+  background-color: #141414;
+  color: #fff;
+}

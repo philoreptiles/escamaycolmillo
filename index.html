@@ -33,10 +33,49 @@
     <p>Crianza de selección genética en Boa imperator y Python regius. Envíos autorizados con nota de remisión.</p>
   </section>
 
-  <!-- Grilla del Catálogo Dinámico -->
+<!-- Grilla del Catálogo Dinámico -->
   <main class="container">
+
+    <!-- BARRA DE FILTROS Y ORDENAMIENTO -->
+    <div class="filtros-bar">
+      <div class="filtro-grupo">
+        <label for="filtro-sexo">Sexo</label>
+        <select id="filtro-sexo" class="filtro-select">
+          <option value="todos">Todos</option>
+          <option value="Macho">Macho</option>
+          <option value="Hembra">Hembra</option>
+        </select>
+      </div>
+
+      <div class="filtro-grupo">
+        <label for="filtro-nacimiento">Año de Nacimiento</label>
+        <select id="filtro-nacimiento" class="filtro-select">
+          <option value="todos">Todos los años</option>
+          <!-- Se poblará automáticamente con los años disponibles en Sheets -->
+        </select>
+      </div>
+
+      <div class="filtro-grupo">
+        <label for="filtro-precio">Rango de Precio</label>
+        <select id="filtro-precio" class="filtro-select">
+          <option value="todos">Todos los precios</option>
+          <option value="menos-2999">Menos de $2,999 MXN</option>
+          <option value="2999-10000">$2,999 - $10,000 MXN</option>
+          <option value="mas-10000">Más de $10,000 MXN</option>
+        </select>
+      </div>
+
+      <div class="filtro-grupo">
+        <label for="orden-precio">Ordenar por Precio</label>
+        <select id="orden-precio" class="filtro-select">
+          <option value="predeterminado">Predeterminado</option>
+          <option value="menor-mayor">De menor a mayor</option>
+          <option value="mayor-menor">De mayor a menor</option>
+        </select>
+      </div>
+    </div>
+
     <div id="catalogo-grid" class="catalogo-grid">
-      <!-- Este mensaje cambiará en cuanto app.js lea la hoja de Google Sheets -->
       <p class="cargando">Cargando ejemplares disponibles...</p>
     </div>
   </main>
