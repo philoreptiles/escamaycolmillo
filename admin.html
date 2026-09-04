@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Administración | Escama & Colmillo</title>
+  
+  <!-- Tipografías -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Estilos globales -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Estilos exclusivos del panel Admin -->
+  <style>
+    .admin-wrapper {
+      max-width: 650px;
+      margin: 30px auto;
+      background-color: #141414;
+      border: 1px solid #262626;
+      border-radius: 6px;
+      padding: 25px 30px;
+    }
+
+    .admin-wrapper h2 {
+      font-family: 'Cinzel', serif;
+      color: #ffffff;
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #a61c1c;
+      padding-bottom: 8px;
+      display: inline-block;
+    }
+
+    /* Grilla compacta de 2 columnas */
+    .admin-form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px 16px;
+    }
+
+    /* Elementos a ancho completo */
+    .col-full {
+      grid-column: span 2;
+    }
+
+    .admin-form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .admin-form-group label {
+      font-size: 0.75rem;
+      color: #a61c1c;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .admin-input {
+      background-color: #0d0d0d;
+      color: #ffffff;
+      border: 1px solid #333333;
+      padding: 8px 10px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-family: 'Montserrat', sans-serif;
+      transition: border-color 0.2s ease;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .admin-input:focus {
+      border-color: #a61c1c;
+      outline: none;
+    }
+
+    .admin-input[type="file"] {
+      padding: 6px;
+      cursor: pointer;
+    }
+
+    .btn-admin {
+      background-color: #a61c1c;
+      color: #ffffff;
+      padding: 12px 18px;
+      border: none;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.2s ease;
+      font-family: 'Montserrat', sans-serif;
+      margin-top: 15px;
+    }
+
+    .btn-admin:hover {
+      background-color: #801212;
+    }
+
+    .btn-logout {
+      background-color: transparent;
+      border: 1px solid #333333;
+      margin-top: 10px;
+    }
+
+    .btn-logout:hover {
+      background-color: #222222;
+    }
+
+    .oculto {
+      display: none !important;
+    }
+
+    .mensaje-estado {
+      margin-top: 12px;
+      font-size: 0.85rem;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .error { color: #ff4444; }
+    .exito { color: #25d366; }
+
+    /* Adaptación a pantallas pequeñas */
+    @media (max-width: 580px) {
+      .admin-form-grid {
+        grid-template-columns: 1fr;
+      }
+      .col-full {
+        grid-column: span 1;
+      }
+      .admin-wrapper {
+        padding: 20px 15px;
+        margin: 15px auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <h2>ESCAMA & COLMILLO</h2>
+        <span class="pimvs-tag">PANEL DE ADMINISTRACIÓN PRIVADO</span>
+      </div>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Ver Catálogo Público</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+    <!-- SECCIÓN DE LOGIN -->
+    <section id="seccion-login" class="admin-wrapper">
+      <h2>Iniciar Sesión</h2>
+      <form id="form-login">
+        <div class="admin-form-group" style="margin-bottom: 12px;">
+          <label for="login-email">Correo Electrónico</label>
+          <input type="email" id="login-email" class="admin-input" required placeholder="admin@escamaycolmillo.com">
+        </div>
+        <div class="admin-form-group">
+          <label for="login-password">Contraseña</label>
+          <input type="password" id="login-password" class="admin-input" required placeholder="••••••••">
+        </div>
+        <button type="submit" class="btn-admin" id="btn-login">Entrar al Sistema</button>
+        <div id="login-msg" class="mensaje-estado"></div>
+      </form>
+    </section>
+
+    <!-- PANEL PRINCIPAL -->
+    <section id="seccion-dashboard" class="admin-wrapper oculto">
+      <h2>Agregar Nuevo Ejemplar</h2>
+      
+      <form id="form-ejemplar">
+        <div class="admin-form-grid">
+          
+          <div class="admin-form-group">
+            <label for="codigo">ID Ejemplar</label>
+            <input type="text" id="codigo" class="admin-input" placeholder="Ej. B-01" required>
+          </div>
+
+          <div class="admin-form-group">
+            <label for="especie">Especie</label>
+            <select id="especie" class="admin-input" required>
+              <option value="Boa imperator">Boa imperator</option>
+              <option value="Python regius">Python regius</option>
+            </select>
+          </div>
+
+          <div class="admin-form-group col-full">
+            <label for="genetica">Genética</label>
+            <input type="text" id="genetica" class="admin-input" placeholder="Ej. Hypo Jungle" required>
+          </div>
+
+          <div class="admin-form-group">
+            <label for="sexo">Sexo</label>
+            <select id="sexo" class="admin-input" required>
+              <option value="Macho">Macho</option>
+              <option value="Hembra">Hembra</option>
+              <option value="No sexado">No sexado</option>
+            </select>
+          </div>
+
+          <div class="admin-form-group">
+            <label for="nacimiento">Nacimiento (Año)</label>
+            <input type="number" id="nacimiento" class="admin-input" required min="2010" max="2030" placeholder="2024">
+          </div>
+
+          <div class="admin-form-group">
+            <label for="precio">Precio (MXN)</label>
+            <input type="number" id="precio" class="admin-input" required placeholder="4500">
+          </div>
+
+          <div class="admin-form-group">
+            <label for="estatus">Disponibilidad</label>
+            <select id="estatus" class="admin-input" required>
+              <option value="Disponible">Disponible</option>
+              <option value="Apartado">Apartado</option>
+              <option value="Vendido">Vendido</option>
+              <option value="Holdback">Holdback</option>
+            </select>
+          </div>
+
+          <div class="admin-form-group col-full">
+            <label for="foto">Fotografía (Tomar o Elegir)</label>
+            <!-- accept="image/*" y capture="environment" abren la cámara trasera en celulares -->
+            <input type="file" id="foto" class="admin-input" accept="image/*" capture="environment" required>
+          </div>
+
+        </div>
+
+        <button type="submit" class="btn-admin" id="btn-guardar">Subir Ejemplar</button>
+        <div id="dashboard-msg" class="mensaje-estado"></div>
+      </form>
+
+      <button id="btn-cerrar-sesion" class="btn-admin btn-logout">Cerrar Sesión</button>
+    </section>
+
+  </main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="admin.js"></script>
+
+</body>
+</html>
