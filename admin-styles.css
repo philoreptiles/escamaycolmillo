@@ -44,6 +44,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 .container {
@@ -427,6 +428,14 @@ body {
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
 }
 
+.inv-card-body {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-grow: 1;
+  min-width: 0;
+}
+
 .inv-thumb {
   width: 65px;
   height: 65px;
@@ -442,6 +451,7 @@ body {
   flex-direction: column;
   gap: 4px;
   flex-grow: 1;
+  min-width: 0;
 }
 
 .inv-title {
@@ -451,11 +461,13 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 .inv-meta {
   font-size: 0.82rem;
   color: var(--text-secondary);
+  word-break: break-word;
 }
 
 .inv-price {
@@ -483,6 +495,7 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-shrink: 0;
 }
 
 .select-estatus-sm {
@@ -507,6 +520,7 @@ body {
   height: 36px;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
   transition: opacity 0.2s;
 }
@@ -602,17 +616,128 @@ body {
   margin-top: 40px;
 }
 
-/* Responsive */
+/* ==========================================================================
+   OPTIMIZACIONES MÓVILES (RESPONSIVE)
+   ========================================================================== */
+
 @media (max-width: 900px) {
-  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
-  .inv-layout { flex-direction: column; }
-  .inv-filters-col { width: 100%; max-width: none; }
+  .kpi-grid { 
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .inv-layout { 
+    flex-direction: column-reverse; 
+  }
+  .inv-filters-col { 
+    width: 100%; 
+    max-width: none; 
+    margin-bottom: 20px;
+  }
 }
 
-@media (max-width: 600px) {
-  .kpi-grid { grid-template-columns: 1fr; }
-  .admin-form-grid { grid-template-columns: 1fr; }
-  .col-full { grid-column: span 1; }
-  .inv-card { flex-direction: column; align-items: flex-start; }
-  .inv-controls { width: 100%; justify-content: space-between; margin-top: 10px; }
+@media (max-width: 650px) {
+  .container {
+    width: 95%;
+  }
+
+  .admin-wrapper {
+    padding: 20px 16px;
+    margin: 15px auto;
+  }
+
+  .header-container {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+
+  .logo-center h2 {
+    font-size: 1.2rem;
+  }
+
+  .card-header-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .btn-logout-top {
+    width: 100%;
+  }
+
+  .admin-form-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .col-full {
+    grid-column: span 1;
+  }
+
+  .inv-header-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .inv-header-actions {
+    width: 100%;
+  }
+
+  .btn-tab-toggle, .btn-csv {
+    flex: 1;
+    justify-content: center;
+  }
+
+  /* Tarjeta de inventario responsiva */
+  .inv-card {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .inv-card-body {
+    width: 100%;
+  }
+
+  .inv-thumb {
+    width: 55px;
+    height: 55px;
+  }
+
+  .inv-title {
+    font-size: 0.9rem;
+  }
+
+  .inv-controls {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 8px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .select-estatus-sm {
+    width: 100%;
+  }
+
+  .btn-sm {
+    padding: 0 14px;
+  }
+}
+
+@media (max-width: 400px) {
+  .kpi-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .kpi-card {
+    padding: 12px 16px;
+  }
+
+  .kpi-value {
+    font-size: 1.3rem;
+  }
 }

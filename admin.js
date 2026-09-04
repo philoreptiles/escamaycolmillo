@@ -229,7 +229,7 @@ function renderizarLista() {
     const statusClass = `badge-${(item.estatus || 'disponible').toLowerCase()}`;
     return `
     <div class="inv-card">
-      <div style="display:flex; align-items:center; gap:16px; flex-grow:1;">
+      <div class="inv-card-body">
         <img src="${item.imagen_url || 'https://via.placeholder.com/60'}" alt="${item.genetica || ''}" class="inv-thumb">
         <div class="inv-details">
           <div class="inv-title">
