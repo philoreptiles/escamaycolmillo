@@ -4,114 +4,153 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="referrer" content="no-referrer">
-  <title>Escama & Colmillo | Herpetocultura de Selección</title>
+  <title>Escama y Colmillo | Crianza respetuosa, ejemplares sanos</title>
   
-  <!-- Tipografías de Google Fonts -->
+  <!-- Tipografía Premium (Cinzel & Plus Jakarta Sans) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- Encabezado -->
+  <!-- Encabezado Principal -->
   <header class="header">
     <div class="header-container">
-      <div class="logo">
-        <h2>ESCAMA & COLMILLO</h2>
-        <span class="pimvs-tag">PIMVS-SEMARNAT-HERP-089-26</span>
-      </div>
-      <nav class="nav-links">
-        <a href="index.html" class="nav-link active">Catálogo</a>
-        <a href="nosotros.html" class="nav-link">Sobre Nosotros</a>
+      
+      <!-- Lado Izquierdo: Menú -->
+      <nav class="nav-left">
+        <a href="#catalogo" class="nav-btn active">Ejemplares</a>
+        <a href="nosotros.html" class="nav-btn">Quiénes somos</a>
       </nav>
-      <a href="https://wa.me/5215512345678" target="_blank" class="btn-wa">
-        Atención Directa
-      </a>
+
+      <!-- Centro: Marca y Subtítulo -->
+      <div class="logo-center">
+        <h1>Escama y Colmillo</h1>
+        <span class="subtitulo-brand">Crianza respetuosa, ejemplares sanos</span>
+        <span class="pimvs-tag">PIMVS-SEMARNAT-HERP-142-26</span>
+      </div>
+
+      <!-- Lado Derecho: Contacto Directo -->
+      <div class="nav-right">
+        <a href="https://wa.me/523300000000" target="_blank" class="btn-wa">
+          Contactar por WhatsApp
+        </a>
+      </div>
+
     </div>
   </header>
 
-  <!-- Banner -->
+  <!-- Banner de Bienvenida -->
   <section class="hero">
-    <h1>Colección Privada & Disponibles</h1>
-    <p>Crianza de selección genética en Boa imperator y Python regius. Envíos autorizados con nota de remisión.</p>
+    <h1>Colección Exclusiva de Víboras de Cascabel</h1>
+    <p>Especialistas en la selección, reproducción en cautiverio y conservación del género <em>Crotalus</em>. Guadalajara, Jalisco.</p>
   </section>
 
-  <!-- Grilla del Catálogo Dinámico -->
-  <main class="container">
+  <!-- Contenido Principal y Filtros -->
+  <main class="container layout-catalogo" id="catalogo">
 
-    <!-- BARRA DE FILTROS Y ORDENAMIENTO -->
-    <div class="filtros-bar">
-      <div class="filtro-grupo">
-        <label for="filtro-estatus">Disponibilidad</label>
-        <select id="filtro-estatus" class="filtro-select">
-          <option value="todos">Todos los estatus</option>
-          <option value="disponible">Disponible</option>
-          <option value="apartado">Apartado</option>
-          <option value="vendido">Vendido</option>
-          <option value="holdback">Holdback</option>
-        </select>
-      </div>
+    <!-- Menú Desplegable de Filtros -->
+    <aside class="sidebar-filtros">
+      <details class="filtros-desplegable" open>
+        <summary class="filtros-toggle">
+          <span>Filtros de Búsqueda</span>
+          <span class="flecha">&#9660;</span>
+        </summary>
 
-      <div class="filtro-grupo">
-        <label for="filtro-sexo">Sexo</label>
-        <select id="filtro-sexo" class="filtro-select">
-          <option value="todos">Todos</option>
-          <option value="Macho">Macho</option>
-          <option value="Hembra">Hembra</option>
-        </select>
-      </div>
+        <div class="filtros-bar">
+          <div class="filtro-grupo">
+            <label for="filtro-estatus">Disponibilidad</label>
+            <select id="filtro-estatus" class="filtro-select">
+              <option value="todos">Todos los estatus</option>
+              <option value="disponible">Disponible</option>
+              <option value="apartado">Apartado</option>
+              <option value="vendido">Vendido</option>
+              <option value="holdback">Holdback</option>
+            </select>
+          </div>
 
-      <div class="filtro-grupo">
-        <label for="filtro-nacimiento">Nacimiento</label>
-        <select id="filtro-nacimiento" class="filtro-select">
-          <option value="todos">Todos los años</option>
-        </select>
-      </div>
+          <div class="filtro-grupo">
+            <label for="filtro-sexo">Sexo</label>
+            <select id="filtro-sexo" class="filtro-select">
+              <option value="todos">Todos</option>
+              <option value="Macho">Macho</option>
+              <option value="Hembra">Hembra</option>
+            </select>
+          </div>
 
-      <div class="filtro-grupo">
-        <label for="filtro-precio">Rango de Precio</label>
-        <select id="filtro-precio" class="filtro-select">
-          <option value="todos">Todos los precios</option>
-          <option value="menos-2999">Menos de $2,999 MXN</option>
-          <option value="2999-10000">$2,999 - $10,000 MXN</option>
-          <option value="mas-10000">Más de $10,000 MXN</option>
-        </select>
-      </div>
+          <div class="filtro-grupo">
+            <label for="filtro-nacimiento">Año de Nacimiento</label>
+            <select id="filtro-nacimiento" class="filtro-select">
+              <option value="todos">Todos los años</option>
+            </select>
+          </div>
 
-      <div class="filtro-grupo">
-        <label for="orden-precio">Ordenar Precio</label>
-        <select id="orden-precio" class="filtro-select">
-          <option value="predeterminado">Predeterminado</option>
-          <option value="menor-mayor">De menor a mayor</option>
-          <option value="mayor-menor">De mayor a menor</option>
-        </select>
-      </div>
-    </div>
+          <div class="filtro-grupo">
+            <label for="filtro-precio">Rango de Precio</label>
+            <select id="filtro-precio" class="filtro-select">
+              <option value="todos">Todos los precios</option>
+              <option value="menos-2999">Menos de $2,999 MXN</option>
+              <option value="2999-10000">$2,999 - $10,000 MXN</option>
+              <option value="mas-10000">Más de $10,000 MXN</option>
+            </select>
+          </div>
 
+          <div class="filtro-grupo">
+            <label for="orden-precio">Ordenar Precio</label>
+            <select id="orden-precio" class="filtro-select">
+              <option value="predeterminado">Predeterminado</option>
+              <option value="menor-mayor">De menor a mayor</option>
+              <option value="mayor-menor">De mayor a menor</option>
+            </select>
+          </div>
+        </div>
+      </details>
+    </aside>
+
+    <!-- Grilla Dinámica de Ejemplares -->
     <div id="catalogo-grid" class="catalogo-grid">
-      <p class="cargando">Cargando ejemplares disponibles...</p>
+      <p class="cargando">Cargando colección de ejemplares...</p>
     </div>
+
   </main>
 
-  <!-- MODAL LIGHTBOX CON NAVEGACIÓN -->
+  <!-- Visor de Fotografías Ampliadas -->
   <div id="modal-imagen" class="modal-lightbox">
     <span class="cerrar-modal">&times;</span>
-    
     <button id="modal-prev" class="modal-nav modal-prev" aria-label="Anterior">&#10094;</button>
-    
     <div class="modal-body">
-      <img id="modal-img-target" src="" alt="Ejemplar ampliado">
       <div id="modal-caption" class="modal-caption"></div>
+      <img id="modal-img-target" src="" alt="Ejemplar ampliado">
     </div>
-
     <button id="modal-next" class="modal-nav modal-next" aria-label="Siguiente">&#10095;</button>
   </div>
 
-  <!-- Librería de Supabase -->
+  <!-- Pie de Página Institucional -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h3>Escama y Colmillo</h3>
+        <p class="subtitulo-brand" style="color: #ffffff;">Crianza respetuosa, ejemplares sanos</p>
+      </div>
+      
+      <div class="footer-links">
+        <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://wa.me/523300000000" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="nosotros.html">Quiénes somos</a>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; Escama y Colmillo — Guadalajara, Jalisco, México. Registro PIMVS autorizado por SEMARNAT.</p>
+        <a href="admin.html" style="margin-top: 8px; display: inline-block;">Acceso Privado</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <!-- Tu archivo JS -->
   <script src="app.js"></script>
 
 </body>

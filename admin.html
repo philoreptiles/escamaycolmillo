@@ -3,120 +3,106 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Panel de Administración | Escama & Colmillo</title>
+  <title>Panel de Administración | Escama y Colmillo</title>
   
-  <!-- Tipografías -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
   
-  <!-- Estilos globales -->
   <link rel="stylesheet" href="styles.css">
 
-  <!-- Estilos exclusivos del panel Admin -->
   <style>
     .admin-wrapper {
-      max-width: 650px;
+      max-width: 750px;
       margin: 30px auto;
-      background-color: #141414;
-      border: 1px solid #262626;
+      background-color: #ffffff;
+      border: 1px solid #e2e8f0;
       border-radius: 6px;
-      padding: 25px 30px;
+      padding: 30px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
     }
 
     .admin-wrapper h2 {
       font-family: 'Cinzel', serif;
-      color: #ffffff;
-      font-size: 1.3rem;
+      color: #0d0d0d;
+      font-size: 1.4rem;
       margin-bottom: 20px;
-      border-bottom: 2px solid #a61c1c;
+      border-bottom: 2px solid #1b3a2b;
       padding-bottom: 8px;
-      display: inline-block;
     }
 
-    /* Grilla compacta de 2 columnas */
     .admin-form-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 12px 16px;
+      gap: 14px 16px;
     }
 
-    /* Elementos a ancho completo */
-    .col-full {
-      grid-column: span 2;
-    }
+    .col-full { grid-column: span 2; }
 
     .admin-form-group {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 5px;
     }
 
     .admin-form-group label {
-      font-size: 0.75rem;
-      color: #a61c1c;
-      font-weight: 600;
+      font-size: 0.72rem;
+      color: #1b3a2b;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.8px;
+      letter-spacing: 0.5px;
     }
 
     .admin-input {
-      background-color: #0d0d0d;
-      color: #ffffff;
-      border: 1px solid #333333;
-      padding: 8px 10px;
+      background-color: #f8f9fa;
+      color: #0d0d0d;
+      border: 1px solid #e2e8f0;
+      padding: 10px 12px;
       border-radius: 4px;
-      font-size: 0.85rem;
-      font-family: 'Montserrat', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 500;
       transition: border-color 0.2s ease;
       width: 100%;
-      box-sizing: border-box;
     }
 
     .admin-input:focus {
-      border-color: #a61c1c;
+      border-color: #1b3a2b;
       outline: none;
     }
 
-    .admin-input[type="file"] {
-      padding: 6px;
-      cursor: pointer;
-    }
-
     .btn-admin {
-      background-color: #a61c1c;
+      background-color: #1b3a2b;
       color: #ffffff;
       padding: 12px 18px;
       border: none;
       border-radius: 4px;
-      font-weight: 700;
+      font-weight: 600;
       font-size: 0.85rem;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
       cursor: pointer;
       width: 100%;
       transition: background-color 0.2s ease;
-      font-family: 'Montserrat', sans-serif;
       margin-top: 15px;
     }
 
     .btn-admin:hover {
-      background-color: #801212;
+      background-color: #12281d;
     }
 
     .btn-logout {
       background-color: transparent;
-      border: 1px solid #333333;
+      border: 1px solid #e2e8f0;
+      color: #64748b;
       margin-top: 10px;
     }
 
     .btn-logout:hover {
-      background-color: #222222;
+      background-color: #f1f5f9;
+      color: #0d0d0d;
     }
 
-    .oculto {
-      display: none !important;
-    }
+    .oculto { display: none !important; }
 
     .mensaje-estado {
       margin-top: 12px;
@@ -125,41 +111,97 @@
       font-weight: 600;
     }
 
-    .error { color: #ff4444; }
-    .exito { color: #25d366; }
+    .error { color: #dc2626; }
+    .exito { color: #1b3a2b; }
 
-    /* Adaptación a pantallas pequeñas */
-    @media (max-width: 580px) {
-      .admin-form-grid {
-        grid-template-columns: 1fr;
-      }
-      .col-full {
-        grid-column: span 1;
-      }
-      .admin-wrapper {
-        padding: 20px 15px;
-        margin: 15px auto;
-      }
+    .inv-card {
+      background: #f8f9fa;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      padding: 14px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
     }
+
+    .inv-thumb {
+      width: 55px;
+      height: 55px;
+      border-radius: 4px;
+      object-fit: cover;
+      background: #e2e8f0;
+    }
+
+    .inv-details {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .inv-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #0d0d0d;
+    }
+
+    .inv-meta {
+      font-size: 0.8rem;
+      color: #64748b;
+    }
+
+    .inv-price {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #1b3a2b;
+    }
+
+    .inv-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .select-estatus-sm {
+      padding: 6px 10px;
+      border-radius: 4px;
+      border: 1px solid #cbd5e1;
+      font-size: 0.8rem;
+      background-color: #ffffff;
+      color: #0d0d0d;
+    }
+
+    .btn-sm {
+      padding: 6px 10px;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-precio { background-color: #0284c7; color: #ffffff; }
+    .btn-delete { background-color: #dc2626; color: #ffffff; }
   </style>
 </head>
 <body>
 
   <header class="header">
     <div class="header-container">
-      <div class="logo">
-        <h2>ESCAMA & COLMILLO</h2>
+      <div class="logo-center" style="grid-column: 2;">
+        <h2>Escama y Colmillo</h2>
         <span class="pimvs-tag">PANEL DE ADMINISTRACIÓN PRIVADO</span>
       </div>
-      <nav class="nav-links">
-        <a href="index.html" class="nav-link">Ver Catálogo Público</a>
-      </nav>
+      <div class="nav-right" style="grid-column: 3;">
+        <a href="index.html" class="nav-btn">Ver Catálogo Público</a>
+      </div>
     </div>
   </header>
 
   <main class="container">
     
-    <!-- SECCIÓN DE LOGIN -->
+    <!-- Inicio de Sesión -->
     <section id="seccion-login" class="admin-wrapper">
       <h2>Iniciar Sesión</h2>
       <form id="form-login">
@@ -171,34 +213,39 @@
           <label for="login-password">Contraseña</label>
           <input type="password" id="login-password" class="admin-input" required placeholder="••••••••">
         </div>
-        <button type="submit" class="btn-admin" id="btn-login">Entrar al Sistema</button>
+        <button type="submit" class="btn-admin" id="btn-login">Acceder al Sistema</button>
         <div id="login-msg" class="mensaje-estado"></div>
       </form>
     </section>
 
-    <!-- PANEL PRINCIPAL -->
+    <!-- Registro de Ejemplares -->
     <section id="seccion-dashboard" class="admin-wrapper oculto">
-      <h2>Agregar Nuevo Ejemplar</h2>
+      <h2>Registrar Nuevo Ejemplar</h2>
       
       <form id="form-ejemplar">
         <div class="admin-form-grid">
           
           <div class="admin-form-group">
             <label for="codigo">ID Ejemplar</label>
-            <input type="text" id="codigo" class="admin-input" placeholder="Ej. B-01" required>
+            <input type="text" id="codigo" class="admin-input" placeholder="Ej. CR-01" required>
           </div>
 
+          <!-- Selección exclusiva de víboras de cascabel -->
           <div class="admin-form-group">
-            <label for="especie">Especie</label>
+            <label for="especie">Especie (Crotalus)</label>
             <select id="especie" class="admin-input" required>
-              <option value="Boa imperator">Boa imperator</option>
-              <option value="Python regius">Python regius</option>
+              <option value="Crotalus atrox">Crotalus atrox</option>
+              <option value="Crotalus basiliscus">Crotalus basiliscus</option>
+              <option value="Crotalus durissus">Crotalus durissus</option>
+              <option value="Crotalus molossus">Crotalus molossus</option>
+              <option value="Crotalus scutulatus">Crotalus scutulatus</option>
+              <option value="Crotalus lepidus">Crotalus lepidus</option>
             </select>
           </div>
 
           <div class="admin-form-group col-full">
-            <label for="genetica">Genética</label>
-            <input type="text" id="genetica" class="admin-input" placeholder="Ej. Hypo Jungle" required>
+            <label for="genetica">Genética / Localidad</label>
+            <input type="text" id="genetica" class="admin-input" placeholder="Ej. Albino / Jalisco" required>
           </div>
 
           <div class="admin-form-group">
@@ -211,13 +258,13 @@
           </div>
 
           <div class="admin-form-group">
-            <label for="nacimiento">Nacimiento (Año)</label>
+            <label for="nacimiento">Año de Nacimiento</label>
             <input type="number" id="nacimiento" class="admin-input" required min="2010" max="2030" placeholder="2024">
           </div>
 
           <div class="admin-form-group">
             <label for="precio">Precio (MXN)</label>
-            <input type="number" id="precio" class="admin-input" required placeholder="4500">
+            <input type="number" id="precio" class="admin-input" required placeholder="5000">
           </div>
 
           <div class="admin-form-group">
@@ -230,25 +277,37 @@
             </select>
           </div>
 
-<div class="admin-form-group col-full">
-  <label for="foto">Fotografía del Ejemplar</label>
-  <!-- Al omitir 'capture', el móvil muestra el menú nativo (Cámara o Galería) -->
-  <input type="file" id="foto" class="admin-input" accept="image/*" required>
-</div>
+          <div class="admin-form-group col-full">
+            <label for="foto">Fotografía</label>
+            <input type="file" id="foto" class="admin-input" accept="image/*" required>
+          </div>
 
         </div>
 
-        <button type="submit" class="btn-admin" id="btn-guardar">Subir Ejemplar</button>
+        <button type="submit" class="btn-admin" id="btn-guardar">Guardar Ejemplar</button>
         <div id="dashboard-msg" class="mensaje-estado"></div>
       </form>
 
       <button id="btn-cerrar-sesion" class="btn-admin btn-logout">Cerrar Sesión</button>
     </section>
 
+    <!-- Lista de Inventario Privado -->
+    <section id="seccion-inventario" class="admin-wrapper oculto">
+      <h2>Inventario Registrado</h2>
+      <div id="lista-inventario">
+        <p class="cargando">Cargando inventario...</p>
+      </div>
+    </section>
+
   </main>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="admin.js"></script>
+  <!-- Pie de página administrativo sencillo sin redes sociales -->
+  <footer style="text-align: center; padding: 30px 0; font-size: 0.8rem; color: #64748b;">
+    <p>&copy; Escama y Colmillo — Sistema Interno de Gestión de Inventario.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="admin.js"></script>
 
 </body>
 </html>
