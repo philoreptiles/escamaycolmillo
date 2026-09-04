@@ -2,8 +2,8 @@
    CONFIGURACIÓN PÚBLICA - ESCAMA Y COLMILLO
    ========================================================================== */
 
-// Configuración de credenciales de Supabase (Sustituir por tus credenciales de proyecto)
-const SUPABASE_URL = 'https://wgrwabzusigtwqffugnq.supabase.co/rest/v1/';
+// Configuración de credenciales de Supabase
+const SUPABASE_URL = 'https://wgrwabzusigtwqffugnq.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_yGvX3ttsjSYHpdz-QrylBA_a1kbj7VX'; 
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
