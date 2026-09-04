@@ -30,11 +30,12 @@ html, body {
   line-height: 1.6;
 }
 
+/* Espaciado del contenedor principal ajustado a casi cero en la parte superior */
 .container {
   width: 90%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 20px 0 40px 0;
+  padding: 5px 0 40px 0;
 }
 
 /* ENCABEZADO Y NAVEGACIÓN */
@@ -137,13 +138,13 @@ html, body {
   transform: translateY(-1px);
 }
 
-/* BANNER PRINCIPAL (HERO) */
+/* BANNER PRINCIPAL (HERO) - Margen inferior reducido a 2px */
 .hero {
   text-align: center;
-  padding: 35px 20px;
+  padding: 25px 20px 15px 20px;
   background-color: var(--color-blanco);
   border-bottom: 1px solid var(--color-gris-borde);
-  margin-bottom: 25px;
+  margin-bottom: 2px;
 }
 
 .hero h1 {
@@ -161,9 +162,9 @@ html, body {
   margin: 0 auto;
 }
 
-/* FILTROS CENTRADOS ARRIBA DE LAS FICHAS */
+/* FILTROS CENTRADOS - Margen inferior hacia las fichas reducido a 5px */
 .contenedor-filtros {
-  margin-bottom: 30px;
+  margin-bottom: 5px;
   width: 100%;
 }
 
@@ -175,7 +176,7 @@ html, body {
 }
 
 .filtros-toggle {
-  padding: 14px 20px;
+  padding: 10px 20px;
   font-family: var(--fuente-titulos);
   font-weight: 700;
   font-size: 0.9rem;
@@ -210,7 +211,7 @@ html, body {
   justify-content: center;
   align-items: center;
   gap: 16px;
-  padding: 18px 20px;
+  padding: 14px 20px;
   border-top: 1px solid var(--color-gris-borde);
 }
 
@@ -251,7 +252,7 @@ html, body {
 .catalogo-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-  gap: 25px;
+  gap: 20px;
   align-items: start;
 }
 
@@ -260,7 +261,7 @@ html, body {
   text-align: center;
   color: var(--color-verde-oscuro);
   font-weight: 600;
-  padding: 50px 0;
+  padding: 30px 0;
   font-size: 1rem;
   letter-spacing: 0.5px;
 }
