@@ -1,22 +1,11 @@
-/* ==========================================================================
-   CONFIGURACIÓN PÚBLICA - ESCAMA Y COLMILLO
-   ========================================================================== */
-
-// Configuración de credenciales de Supabase
 const SUPABASE_URL = 'https://wgrwabzusigtwqffugnq.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_yGvX3ttsjSYHpdz-QrylBA_a1kbj7VX'; 
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// Número oficial de WhatsApp para consultas (Guadalajara, Jalisco)
 const WHATSAPP_NUMERO = "523300000000"; 
 
 let todosLosEjemplares = [];
 let ejemplaresFiltrados = [];
-let indiceActualModal = 0;
-
-/* ==========================================================================
-   INICIALIZACIÓN
-   ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
   cargarEjemplares();
@@ -27,11 +16,20 @@ document.addEventListener('DOMContentLoaded', () => {
     filtrosBar.addEventListener('change', aplicarFiltros);
   }
 
-  // Configuración del Visor Lightbox
+  const btnLimpiar = document.getElementById('btn-limpiar-filtros');
+  if (btnLimpiar) {
+    btnLimpiar.addEventListener('click', limpiarFiltros);
+  }
+
+  const btnVolverInicio = document.getElementById('btn-volver-inicio');
+  if (btnVolverInicio) {
+    btnVolverInicio.addEventListener('click', () => {
+      document.getElementById('catalogo')?.scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+
   const modal = document.getElementById('modal-imagen');
   const btnCerrar = document.querySelector('.cerrar-modal');
-  const btnPrev = document.getElementById('modal-prev');
-  const btnNext = document.getElementById('modal-next');
 
   if (btnCerrar) {
     btnCerrar.addEventListener('click', () => modal.classList.remove('activo'));
@@ -43,18 +41,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  if (btnPrev) btnPrev.addEventListener('click', () => navegarModal(-1));
-  if (btnNext) btnNext.addEventListener('click', () => navegarModal(1));
-
-  // Control mediante teclado
   document.addEventListener('keydown', (e) => {
     if (!modal || !modal.classList.contains('activo')) return;
-    if (e.key === 'ArrowLeft') navegarModal(-1);
-    if (e.key === 'ArrowRight') navegarModal(1);
     if (e.key === 'Escape') modal.classList.remove('activo');
   });
 
-  // Evento para abrir fotografía
   document.addEventListener('click', (e) => {
     if (e.target && e.target.classList.contains('img-ampliable')) {
       const index = parseInt(e.target.dataset.index, 10);
@@ -64,10 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-
-/* ==========================================================================
-   SUSCRIPCIÓN EN TIEMPO REAL (REALTIME)
-   ========================================================================== */
 
 function suscribirCambiosEnTiempoReal() {
   supabaseClient
@@ -83,10 +70,6 @@ function suscribirCambiosEnTiempoReal() {
     )
     .subscribe();
 }
-
-/* ==========================================================================
-   CARGA Y FILTRADO DE DATOS
-   ========================================================================== */
 
 async function cargarEjemplares() {
   const contenedor = document.getElementById('catalogo-grid');
@@ -126,17 +109,14 @@ function poblarFiltroNacimiento(ejemplares) {
   if (!selectNacimiento) return;
 
   selectNacimiento.innerHTML = '<option value="todos">Todos los años</option>';
-
   const anosUnicos = [...new Set(ejemplares.map(item => item.nacimiento).filter(Boolean))].sort((a, b) => b - a);
 
-  const fragmento = document.createDocumentFragment();
   anosUnicos.forEach(ano => {
     const option = document.createElement('option');
     option.value = ano;
     option.textContent = ano;
-    fragmento.appendChild(option);
+    selectNacimiento.appendChild(option);
   });
-  selectNacimiento.appendChild(fragmento);
 }
 
 function parsearPrecio(precioRaw) {
@@ -146,8 +126,7 @@ function parsearPrecio(precioRaw) {
 }
 
 function formatearPrecio(precioRaw) {
-  const numero = parsearPrecio(precioRaw);
-  return numero.toLocaleString('en-US');
+  return parsearPrecio(precioRaw).toLocaleString('en-US');
 }
 
 function aplicarFiltros() {
@@ -189,9 +168,14 @@ function aplicarFiltros() {
   renderizarCatalogo(ejemplaresFiltrados);
 }
 
-/* ==========================================================================
-   RENDERIZADO DE FICHAS DE EJEMPLARES
-   ========================================================================== */
+function limpiarFiltros() {
+  document.getElementById('filtro-estatus').value = 'todos';
+  document.getElementById('filtro-sexo').value = 'todos';
+  document.getElementById('filtro-nacimiento').value = 'todos';
+  document.getElementById('filtro-precio').value = 'todos';
+  document.getElementById('orden-precio').value = 'predeterminado';
+  aplicarFiltros();
+}
 
 function renderizarCatalogo(ejemplares) {
   const contenedor = document.getElementById('catalogo-grid');
@@ -251,24 +235,17 @@ function renderizarCatalogo(ejemplares) {
   contenedor.appendChild(fragmento);
 }
 
-/* ==========================================================================
-   LIGHTBOX
-   ========================================================================== */
-
 function mostrarModalPorIndice(index) {
   if (!ejemplaresFiltrados.length || index < 0 || index >= ejemplaresFiltrados.length) return;
 
-  indiceActualModal = index;
-  const item = ejemplaresFiltrados[indiceActualModal];
-  const urlImagen = item.imagen_url || '';
-
+  const item = ejemplaresFiltrados[index];
   const modal = document.getElementById('modal-imagen');
   const modalImg = document.getElementById('modal-img-target');
   const modalCaption = document.getElementById('modal-caption');
 
   if (!modal || !modalImg || !modalCaption) return;
 
-  modalImg.src = urlImagen;
+  modalImg.src = item.imagen_url || '';
   modalCaption.innerHTML = `
     ID: ${item.codigo || 'N/A'} &nbsp;|&nbsp; 
     Especie: ${item.especie || 'N/A'} &nbsp;|&nbsp; 
@@ -278,18 +255,4 @@ function mostrarModalPorIndice(index) {
   `;
 
   modal.classList.add('activo');
-}
-
-function navegarModal(direccion) {
-  if (!ejemplaresFiltrados.length) return;
-
-  let nuevoIndice = indiceActualModal + direccion;
-
-  if (nuevoIndice < 0) {
-    nuevoIndice = ejemplaresFiltrados.length - 1;
-  } else if (nuevoIndice >= ejemplaresFiltrados.length) {
-    nuevoIndice = 0;
-  }
-
-  mostrarModalPorIndice(nuevoIndice);
 }

@@ -227,6 +227,78 @@
 
   </main>
 
+  <!-- MODAL DE EDICIÓN COMPLETA -->
+  <div id="modal-editar" class="modal-overlay oculto">
+    <div class="modal-content admin-wrapper">
+      <div class="card-header-bar">
+        <h2><i class="fa-solid fa-pen-to-square"></i> Editar Ejemplar</h2>
+        <button type="button" class="btn-close-modal" onclick="cerrarModalEditar()">&times;</button>
+      </div>
+
+      <form id="form-editar-ejemplar">
+        <input type="hidden" id="edit-id-original">
+
+        <div class="admin-form-grid">
+          <div class="admin-form-group">
+            <label for="edit-id">ID Ejemplar</label>
+            <input type="text" id="edit-id" class="admin-input" required />
+          </div>
+
+          <div class="admin-form-group">
+            <label for="edit-especie">Especie</label>
+            <select id="edit-especie" class="admin-input" required>
+              <option value="Crotalus atrox">Crotalus atrox</option>
+              <option value="Crotalus basiliscus">Crotalus basiliscus</option>
+              <option value="Crotalus durissus">Crotalus durissus</option>
+              <option value="Crotalus molossus">Crotalus molossus</option>
+              <option value="Crotalus scutulatus">Crotalus scutulatus</option>
+              <option value="Crotalus lepidus">Crotalus lepidus</option>
+            </select>
+          </div>
+
+          <div class="admin-form-group col-full">
+            <label for="edit-genetica">Genética / Localidad</label>
+            <input type="text" id="edit-genetica" class="admin-input" required />
+          </div>
+
+          <div class="admin-form-group">
+            <label for="edit-sexo">Sexo</label>
+            <select id="edit-sexo" class="admin-input" required>
+              <option value="Macho">Macho ♂</option>
+              <option value="Hembra">Hembra ♀</option>
+              <option value="No sexado">No sexado ⚥</option>
+            </select>
+          </div>
+
+          <div class="admin-form-group">
+            <label for="edit-nacimiento">Año de Nacimiento</label>
+            <input type="number" id="edit-nacimiento" class="admin-input" min="2010" max="2030" required />
+          </div>
+
+          <div class="admin-form-group">
+            <label for="edit-precio">Precio (MXN)</label>
+            <input type="number" id="edit-precio" class="admin-input" required />
+          </div>
+
+          <div class="admin-form-group">
+            <label for="edit-estatus">Disponibilidad</label>
+            <select id="edit-estatus" class="admin-input" required>
+              <option value="Disponible">Disponible</option>
+              <option value="Apartado">Apartado</option>
+              <option value="Vendido">Vendido</option>
+              <option value="Holdback">Holdback</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:12px; margin-top:20px;">
+          <button type="submit" class="btn-admin btn-emerald" style="margin-top:0;"><i class="fa-solid fa-floppy-disk"></i> Guardar Cambios</button>
+          <button type="button" class="btn-admin" style="margin-top:0; background:#334155;" onclick="cerrarModalEditar()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <footer class="admin-footer">
     <p>&copy; Escama y Colmillo — Plataforma de Gestión Herpetológica Privada.</p>
   </footer>

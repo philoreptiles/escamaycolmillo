@@ -1,18 +1,18 @@
 /* ==========================================================================
-   ESTILOS PREMIUM DARK MODE - ESCAMA Y COLMILLO ADMIN
+   ESTILOS PREMIUM DARK MODE - ESCAMA Y COLMILLO ADMIN (YELLOW THEME)
    ========================================================================== */
 
 :root {
-  --bg-deep: #080c0a;
-  --bg-card: rgba(18, 26, 22, 0.75);
-  --bg-card-solid: #111a15;
-  --bg-input: #16221c;
+  --bg-deep: #0c0b08;
+  --bg-card: rgba(26, 24, 18, 0.75);
+  --bg-card-solid: #1a1811;
+  --bg-input: #222016;
   
-  --border-subtle: rgba(0, 230, 118, 0.15);
-  --border-focus: #00e676;
+  --border-subtle: rgba(234, 179, 8, 0.18);
+  --border-focus: #eab308;
   
-  --accent-emerald: #00e676;
-  --accent-emerald-glow: rgba(0, 230, 118, 0.25);
+  --accent-emerald: #eab308; /* Acento principal cambiado a amarillo */
+  --accent-emerald-glow: rgba(234, 179, 8, 0.25);
   --accent-amber: #ffb300;
   --accent-red: #ff5252;
   --accent-purple: #ab47bc;
@@ -37,8 +37,8 @@
 body {
   background-color: var(--bg-deep);
   background-image: 
-    radial-gradient(circle at 15% 20%, rgba(0, 230, 118, 0.05) 0%, transparent 40%),
-    radial-gradient(circle at 85% 80%, rgba(0, 150, 136, 0.04) 0%, transparent 40%);
+    radial-gradient(circle at 15% 20%, rgba(234, 179, 8, 0.06) 0%, transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(202, 138, 4, 0.04) 0%, transparent 40%);
   color: var(--text-primary);
   font-family: var(--fuente-cuerpo);
   min-height: 100vh;
@@ -59,7 +59,7 @@ body {
    ========================================================================== */
 
 .header {
-  background: rgba(11, 16, 13, 0.85);
+  background: rgba(16, 15, 11, 0.85);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-subtle);
   position: sticky;
@@ -83,7 +83,7 @@ body {
   font-weight: 900;
   letter-spacing: 1px;
   color: #fff;
-  text-shadow: 0 0 10px rgba(0, 230, 118, 0.3);
+  text-shadow: 0 0 10px rgba(234, 179, 8, 0.3);
 }
 
 .pimvs-tag {
@@ -220,7 +220,7 @@ body {
   border-color: var(--accent-emerald);
   box-shadow: 0 0 10px var(--accent-emerald-glow);
   outline: none;
-  background-color: #1a2921;
+  background-color: #2a271a;
 }
 
 .file-drop-zone {
@@ -235,7 +235,7 @@ body {
 }
 
 .file-drop-zone:hover {
-  background: #1c2e24;
+  background: #2e2a1c;
 }
 
 .admin-input-file {
@@ -257,7 +257,7 @@ body {
 
 /* Botones */
 .btn-admin {
-  background: #22352a;
+  background: #35301f;
   color: #fff;
   padding: 12px 20px;
   border: 1px solid var(--border-subtle);
@@ -277,16 +277,16 @@ body {
 }
 
 .btn-emerald {
-  background: linear-gradient(135deg, #00c853 0%, #009688 100%);
+  background: linear-gradient(135deg, #facc15 0%, #ca8a04 100%);
   border: none;
   color: #000;
   font-weight: 800;
-  box-shadow: 0 4px 15px rgba(0, 230, 118, 0.3);
+  box-shadow: 0 4px 15px rgba(234, 179, 8, 0.3);
 }
 
 .btn-emerald:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 230, 118, 0.5);
+  box-shadow: 0 6px 20px rgba(234, 179, 8, 0.5);
 }
 
 .btn-logout-top {
@@ -341,7 +341,7 @@ body {
   font-family: var(--fuente-titulos);
 }
 
-.kpi-card.accent-green .kpi-value { color: var(--accent-emerald); }
+.kpi-card.accent-green .kpi-value { color: #00e676; } /* Mantiene Verde para Disponibles */
 .kpi-card.accent-amber .kpi-value { color: var(--accent-amber); }
 .kpi-card.accent-blue .kpi-value { color: #38bdf8; }
 
@@ -392,13 +392,13 @@ body {
 }
 
 .btn-csv {
-  background: rgba(16, 185, 129, 0.15);
-  border-color: rgba(16, 185, 129, 0.4);
-  color: #34d399;
+  background: rgba(234, 179, 8, 0.15);
+  border-color: rgba(234, 179, 8, 0.4);
+  color: #facc15;
 }
 
 .btn-csv:hover {
-  background: #10b981;
+  background: #eab308;
   color: #000;
 }
 
@@ -476,7 +476,7 @@ body {
   font-size: 0.95rem;
 }
 
-/* Badges de estatus */
+/* Badges de estatus - "Disponible" en Verde (#00e676) */
 .badge-status {
   padding: 3px 8px;
   border-radius: 20px;
@@ -689,7 +689,6 @@ body {
     justify-content: center;
   }
 
-  /* Tarjeta de inventario responsiva */
   .inv-card {
     flex-direction: column;
     align-items: stretch;

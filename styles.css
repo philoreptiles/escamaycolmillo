@@ -1,14 +1,17 @@
 /* ==========================================================================
-   ESTILOS PREMIUM - ESCAMA Y COLMILLO (DARK EMERALD & GOLD)
+   ESTILOS PREMIUM - ESCAMA Y COLMILLO (DARK & YELLOW ACCENT)
    ========================================================================== */
 
 :root {
   --bg-principal: #0b0f12;
   --bg-tarjeta: #141b21;
   --bg-header: rgba(11, 15, 18, 0.85);
-  --color-verde-esmeralda: #10b981;
-  --color-verde-glow: rgba(16, 185, 129, 0.25);
-  --color-dorado: #d4af37;
+  
+  /* Color Principal de Marca */
+  --color-amarillo: #facc15;
+  --color-amarillo-hover: #eab308;
+  --color-amarillo-glow: rgba(250, 204, 21, 0.25);
+  
   --color-texto-blanco: #f8fafc;
   --color-texto-mutado: #94a3b8;
   --color-borde: #222d37;
@@ -76,7 +79,7 @@ html, body {
 
 .subtitulo-brand {
   font-size: 0.75rem;
-  color: var(--color-dorado);
+  color: var(--color-amarillo);
   letter-spacing: 0.5px;
   display: block;
 }
@@ -114,9 +117,9 @@ html, body {
 
 .nav-btn:hover,
 .nav-btn.active {
-  background-color: rgba(16, 185, 129, 0.1);
-  color: var(--color-verde-esmeralda);
-  border-color: var(--color-verde-esmeralda);
+  background-color: rgba(250, 204, 21, 0.1);
+  color: var(--color-amarillo);
+  border-color: var(--color-amarillo);
 }
 
 .btn-wa {
@@ -142,10 +145,10 @@ html, body {
    ========================================================================== */
 
 .hero {
-  background: radial-gradient(circle at center, #142820 0%, var(--bg-principal) 80%);
+  background: radial-gradient(circle at center, #231f0d 0%, var(--bg-principal) 80%);
   color: var(--color-texto-blanco);
   text-align: center;
-  padding: 60px 20px 40px;
+  padding: 40px 20px 40px;
   border-bottom: 1px solid var(--color-borde);
 }
 
@@ -165,6 +168,71 @@ html, body {
   color: var(--color-texto-mutado);
   max-width: 650px;
   margin: 0 auto;
+}
+
+/* ==========================================================================
+   SECCIÓN NOSOTROS
+   ========================================================================== */
+
+.nosotros-section {
+  padding: 40px 0 20px 0;
+  text-align: center;
+}
+
+.nosotros-section h2 {
+  font-family: var(--fuente-titulos);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-texto-blanco);
+  margin-bottom: 20px;
+  letter-spacing: 0.8px;
+}
+
+.nosotros-section p {
+  color: var(--color-texto-mutado);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  max-width: 900px;
+  margin: 0 auto 50px auto;
+}
+
+.nosotros-section p strong {
+  color: var(--color-amarillo);
+}
+
+.nosotros-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 28px;
+}
+
+.nosotros-card {
+  background: var(--bg-tarjeta);
+  border: 1px solid var(--color-borde);
+  border-radius: 14px;
+  padding: 30px 24px;
+  text-align: left;
+  transition: var(--transicion-suave);
+}
+
+.nosotros-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--color-amarillo);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px var(--color-amarillo-glow);
+}
+
+.nosotros-card h3 {
+  font-family: var(--fuente-titulos);
+  font-size: 1.2rem;
+  color: var(--color-amarillo);
+  margin-bottom: 12px;
+}
+
+.nosotros-card p {
+  font-size: 0.9rem;
+  color: var(--color-texto-mutado);
+  line-height: 1.6;
+  margin: 0;
 }
 
 /* ==========================================================================
@@ -190,7 +258,7 @@ html, body {
   font-weight: 700;
   font-size: 0.95rem;
   cursor: pointer;
-  color: var(--color-dorado);
+  color: var(--color-amarillo);
   letter-spacing: 1px;
   text-transform: uppercase;
 }
@@ -232,12 +300,12 @@ html, body {
 }
 
 .filtro-select:focus {
-  border-color: var(--color-verde-esmeralda);
-  box-shadow: 0 0 0 3px var(--color-verde-glow);
+  border-color: var(--color-amarillo);
+  box-shadow: 0 0 0 3px var(--color-amarillo-glow);
 }
 
 /* ==========================================================================
-   CATÁLOGO / TARJETAS (JS ACUPADO)
+   CATÁLOGO / TARJETAS
    ========================================================================== */
 
 .catalogo-grid {
@@ -258,8 +326,8 @@ html, body {
 
 .card:hover {
   transform: translateY(-6px);
-  border-color: var(--color-borde-hover);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px var(--color-verde-glow);
+  border-color: var(--color-amarillo);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px var(--color-amarillo-glow);
 }
 
 .card-img {
@@ -296,7 +364,7 @@ html, body {
   box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
-.status-badge.disponible { background: rgba(16, 185, 129, 0.85); color: #fff; }
+.status-badge.disponible { background: rgba(250, 204, 21, 0.9); color: #0b0f12; }
 .status-badge.apartado { background: rgba(245, 158, 11, 0.85); color: #fff; }
 .status-badge.vendido { background: rgba(239, 68, 68, 0.85); color: #fff; }
 .status-badge.holdback { background: rgba(99, 102, 241, 0.85); color: #fff; }
@@ -311,7 +379,7 @@ html, body {
 .especie {
   font-size: 0.78rem;
   font-style: italic;
-  color: var(--color-dorado);
+  color: var(--color-amarillo);
   margin-bottom: 2px;
 }
 
@@ -355,13 +423,13 @@ html, body {
 .precio {
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--color-verde-esmeralda);
+  color: var(--color-amarillo);
 }
 
 .btn-card-wa {
-  background: rgba(16, 185, 129, 0.12);
-  color: var(--color-verde-esmeralda);
-  border: 1px solid var(--color-verde-esmeralda);
+  background: rgba(250, 204, 21, 0.12);
+  color: var(--color-amarillo);
+  border: 1px solid var(--color-amarillo);
   padding: 6px 14px;
   border-radius: 6px;
   font-weight: 600;
@@ -371,8 +439,8 @@ html, body {
 }
 
 .btn-card-wa:hover {
-  background: var(--color-verde-esmeralda);
-  color: #fff;
+  background: var(--color-amarillo);
+  color: #0b0f12;
 }
 
 .cargando {
@@ -462,8 +530,9 @@ html, body {
 }
 
 .modal-nav:hover {
-  background: var(--color-verde-esmeralda);
-  border-color: var(--color-verde-esmeralda);
+  background: var(--color-amarillo);
+  border-color: var(--color-amarillo);
+  color: #0b0f12;
 }
 
 .modal-prev { left: 24px; }
@@ -510,7 +579,7 @@ html, body {
 }
 
 .footer-links a:hover {
-  color: var(--color-verde-esmeralda);
+  color: var(--color-amarillo);
 }
 
 .footer-bottom {
@@ -531,4 +600,77 @@ html, body {
   .header-container { flex-direction: column; }
   .catalogo-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
   .hero h1 { font-size: 1.6rem; }
+  .nosotros-section h2 { font-size: 1.6rem; }
+}
+
+/* ==========================================================================
+   ESTILOS PARA BOTONES DE ACCIÓN Y NAVEGACIÓN
+   ========================================================================== */
+
+/* 1. Botón "Limpiar Filtros" */
+.filtro-accion {
+  display: flex;
+  align-items: flex-end; /* Alinea el botón con la base de los select */
+}
+
+.btn-filtro-limpiar {
+  width: 100%;
+  padding: 10px 16px;
+  background-color: transparent;
+  color: var(--color-texto-mutado);
+  border: 1px solid var(--color-borde);
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transicion-suave);
+}
+
+.btn-filtro-limpiar:hover {
+  background-color: rgba(250, 204, 21, 0.1);
+  color: var(--color-amarillo);
+  border-color: var(--color-amarillo);
+  box-shadow: 0 0 12px var(--color-amarillo-glow);
+}
+
+.btn-filtro-limpiar:active {
+  transform: scale(0.98);
+}
+
+
+/* 2. Botón "Volver al inicio" */
+.volver-inicio-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 45px 0 20px 0;
+  width: 100%;
+}
+
+.btn-volver-top {
+  background: var(--bg-tarjeta);
+  color: var(--color-texto-blanco);
+  border: 1px solid var(--color-borde);
+  padding: 12px 28px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transicion-suave);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.btn-volver-top:hover {
+  background: var(--color-amarillo);
+  color: var(--bg-principal);
+  border-color: var(--color-amarillo);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px var(--color-amarillo-glow);
+}
+
+.btn-volver-top:active {
+  transform: translateY(-1px);
 }

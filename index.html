@@ -42,7 +42,7 @@
     </div>
   </header>
 
-  <!-- Banner de Bienvenida -->
+  <!-- Banner de Bienvenida (Compacto) -->
   <section class="hero">
     <h1>Colección Exclusiva de Víboras de Cascabel</h1>
     <p>Especialistas en la selección, reproducción en cautiverio y conservación del género <em>Crotalus</em>. Guadalajara, Jalisco.</p>
@@ -51,7 +51,7 @@
   <!-- Contenido Principal -->
   <main class="container" id="catalogo">
 
-    <!-- Menú Desplegable de Filtros (Centrado Arriba) -->
+    <!-- Menú Desplegable de Filtros -->
     <section class="contenedor-filtros">
       <details class="filtros-desplegable" open>
         <summary class="filtros-toggle">
@@ -105,6 +105,10 @@
               <option value="mayor-menor">De mayor a menor</option>
             </select>
           </div>
+
+          <div class="filtro-grupo filtro-accion">
+            <button type="button" id="btn-limpiar-filtros" class="btn-filtro-limpiar">Limpiar Filtros</button>
+          </div>
         </div>
       </details>
     </section>
@@ -112,6 +116,13 @@
     <!-- Grilla Dinámica de Ejemplares -->
     <div id="catalogo-grid" class="catalogo-grid">
       <p class="cargando">Cargando colección de ejemplares...</p>
+    </div>
+
+    <!-- Botón Volver al Inicio Estilizado -->
+    <div class="volver-inicio-wrapper">
+      <button type="button" id="btn-volver-inicio" class="btn-volver-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+        Volver al inicio &#8593;
+      </button>
     </div>
 
   </main>
@@ -127,12 +138,12 @@
     <button id="modal-next" class="modal-nav modal-next" aria-label="Siguiente">&#10095;</button>
   </div>
 
-  <!-- Pie de Página Institucional (Compacto) -->
+  <!-- Pie de Página Institucional -->
   <footer class="main-footer">
     <div class="footer-container">
       <div class="footer-brand">
         <h3>Escama y Colmillo</h3>
-        <p class="subtitulo-brand" style="color: #ffffff;">Crianza respetuosa, ejemplares sanos</p>
+        <p class="subtitulo-brand" style="color: var(--color-dorado);">Crianza respetuosa, ejemplares sanos</p>
       </div>
       
       <div class="footer-links">
@@ -144,7 +155,7 @@
 
       <div class="footer-bottom">
         <p>&copy; Escama y Colmillo — Guadalajara, Jalisco, México. Registro PIMVS autorizado por SEMARNAT.</p>
-        <a href="admin.html" style="margin-top: 4px; display: inline-block;">Acceso Privado</a>
+        <a href="admin.html" style="margin-top: 4px; display: inline-block; color: var(--color-texto-mutado);">Acceso Privado</a>
       </div>
     </div>
   </footer>

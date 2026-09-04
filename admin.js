@@ -37,12 +37,13 @@ function evaluarSesion(session) {
 }
 
 /* ==========================================================================
-   AUTENTICACIÓN Y REGISTRO
+   AUTENTICACIÓN, REGISTRO Y EDICIÓN
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
   const formLogin = document.getElementById('form-login');
   const formEjemplar = document.getElementById('form-ejemplar');
+  const formEditar = document.getElementById('form-editar-ejemplar');
   const btnCerrarSesion = document.getElementById('btn-cerrar-sesion');
 
   if (formLogin) {
@@ -139,6 +140,35 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       } finally {
         if (btnGuardar) btnGuardar.disabled = false;
+      }
+    });
+  }
+
+  if (formEditar) {
+    formEditar.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const idOriginal = document.getElementById('edit-id-original').value;
+      const datosActualizados = {
+        id: document.getElementById('edit-id').value.trim(),
+        especie: document.getElementById('edit-especie').value,
+        genetica: document.getElementById('edit-genetica').value.trim(),
+        sexo: document.getElementById('edit-sexo').value,
+        nacimiento: parseInt(document.getElementById('edit-nacimiento').value, 10),
+        precio: parseFloat(document.getElementById('edit-precio').value),
+        estatus: document.getElementById('edit-estatus').value
+      };
+
+      const { error } = await supabaseClient
+        .from('ejemplares')
+        .update(datosActualizados)
+        .eq('id', idOriginal);
+
+      if (error) {
+        alert('Error al actualizar ejemplar: ' + error.message);
+      } else {
+        cerrarModalEditar();
+        cargarInventarioAdmin();
       }
     });
   }
@@ -249,7 +279,7 @@ function renderizarLista() {
           <option value="Holdback" ${item.estatus === 'Holdback' ? 'selected' : ''}>Holdback</option>
         </select>
         
-        <button class="btn-sm btn-precio" onclick="cambiarPrecio('${item.id}', ${item.precio})" title="Editar Precio"><i class="fa-solid fa-pen"></i></button>
+        <button class="btn-sm btn-precio" onclick="abrirModalEditar('${item.id}')" title="Editar Ejemplar"><i class="fa-solid fa-pen"></i></button>
         <button class="btn-sm btn-delete" onclick="eliminarEjemplar('${item.id}')" title="Eliminar Ejemplar"><i class="fa-solid fa-trash-can"></i></button>
       </div>
     </div>
@@ -271,6 +301,30 @@ function actualizarOpcionesEspecie() {
   if (valorActual && especies.includes(valorActual)) {
     select.value = valorActual;
   }
+}
+
+/* ==========================================================================
+   MODAL DE EDICIÓN DE EJEMPLAR
+   ========================================================================== */
+
+function abrirModalEditar(idEjemplar) {
+  const ejemplar = todosLosEjemplares.find(item => item.id === idEjemplar);
+  if (!ejemplar) return;
+
+  document.getElementById('edit-id-original').value = ejemplar.id;
+  document.getElementById('edit-id').value = ejemplar.id;
+  document.getElementById('edit-especie').value = ejemplar.especie || 'Crotalus atrox';
+  document.getElementById('edit-genetica').value = ejemplar.genetica || '';
+  document.getElementById('edit-sexo').value = ejemplar.sexo || 'Macho';
+  document.getElementById('edit-nacimiento').value = ejemplar.nacimiento || '';
+  document.getElementById('edit-precio').value = ejemplar.precio || 0;
+  document.getElementById('edit-estatus').value = ejemplar.estatus || 'Disponible';
+
+  document.getElementById('modal-editar').classList.remove('oculto');
+}
+
+function cerrarModalEditar() {
+  document.getElementById('modal-editar').classList.add('oculto');
 }
 
 /* ==========================================================================
@@ -320,7 +374,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ==========================================================================
-   ACCIONES SOBRE EL INVENTARIO (CSV, ESTATUS, PRECIO, ELIMINAR)
+   ACCIONES SOBRE EL INVENTARIO (CSV, ESTATUS, ELIMINAR)
    ========================================================================== */
 
 async function descargarCSV() {
@@ -374,28 +428,6 @@ async function cambiarEstatus(idEjemplar, nuevoEstatus) {
   }
 }
 
-async function cambiarPrecio(idEjemplar, precioActual) {
-  const nuevoPrecioRaw = prompt(`Nuevo precio para el ejemplar ${idEjemplar}:`, precioActual);
-  if (nuevoPrecioRaw === null) return;
-
-  const nuevoPrecio = parseFloat(nuevoPrecioRaw);
-  if (isNaN(nuevoPrecio) || nuevoPrecio < 0) {
-    alert('Ingresa un número válido para el precio.');
-    return;
-  }
-
-  const { error } = await supabaseClient
-    .from('ejemplares')
-    .update({ precio: nuevoPrecio })
-    .eq('id', idEjemplar);
-
-  if (error) {
-    alert('Error al actualizar precio: ' + error.message);
-  } else {
-    cargarInventarioAdmin();
-  }
-}
-
 async function eliminarEjemplar(idEjemplar) {
   if (!confirm(`¿Confirmas la eliminación del ejemplar ${idEjemplar}?`)) return;
 
@@ -411,8 +443,9 @@ async function eliminarEjemplar(idEjemplar) {
   }
 }
 
+window.abrirModalEditar = abrirModalEditar;
+window.cerrarModalEditar = cerrarModalEditar;
 window.toggleMostrarTodos = toggleMostrarTodos;
 window.descargarCSV = descargarCSV;
 window.cambiarEstatus = cambiarEstatus;
-window.cambiarPrecio = cambiarPrecio;
 window.eliminarEjemplar = eliminarEjemplar;
