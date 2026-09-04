@@ -19,18 +19,18 @@
   <header class="header">
     <div class="header-container">
       
-      <!-- Lado Izquierdo: Menú -->
-      <nav class="nav-left">
-        <a href="#catalogo" class="nav-btn active">Ejemplares</a>
-        <a href="nosotros.html" class="nav-btn">Quiénes somos</a>
-      </nav>
-
-      <!-- Centro: Marca y Subtítulo -->
-      <div class="logo-center">
+      <!-- Lado Izquierdo: Nombre de la Marca e Info PIMVS -->
+      <div class="logo-left">
         <h1>Escama y Colmillo</h1>
         <span class="subtitulo-brand">Crianza respetuosa, ejemplares sanos</span>
         <span class="pimvs-tag">PIMVS-SEMARNAT-HERP-142-26</span>
       </div>
+
+      <!-- Centro: Menú de Navegación -->
+      <nav class="nav-center">
+        <a href="#catalogo" class="nav-btn active">Ejemplares</a>
+        <a href="nosotros.html" class="nav-btn">Quiénes somos</a>
+      </nav>
 
       <!-- Lado Derecho: Contacto Directo -->
       <div class="nav-right">
@@ -48,11 +48,11 @@
     <p>Especialistas en la selección, reproducción en cautiverio y conservación del género <em>Crotalus</em>. Guadalajara, Jalisco.</p>
   </section>
 
-  <!-- Contenido Principal y Filtros -->
-  <main class="container layout-catalogo" id="catalogo">
+  <!-- Contenido Principal -->
+  <main class="container" id="catalogo">
 
-    <!-- Menú Desplegable de Filtros -->
-    <aside class="sidebar-filtros">
+    <!-- Menú Desplegable de Filtros (Centrado Arriba) -->
+    <section class="contenedor-filtros">
       <details class="filtros-desplegable" open>
         <summary class="filtros-toggle">
           <span>Filtros de Búsqueda</span>
@@ -107,7 +107,7 @@
           </div>
         </div>
       </details>
-    </aside>
+    </section>
 
     <!-- Grilla Dinámica de Ejemplares -->
     <div id="catalogo-grid" class="catalogo-grid">
@@ -127,7 +127,7 @@
     <button id="modal-next" class="modal-nav modal-next" aria-label="Siguiente">&#10095;</button>
   </div>
 
-  <!-- Pie de Página Institucional -->
+  <!-- Pie de Página Institucional (Compacto) -->
   <footer class="main-footer">
     <div class="footer-container">
       <div class="footer-brand">
@@ -144,7 +144,7 @@
 
       <div class="footer-bottom">
         <p>&copy; Escama y Colmillo — Guadalajara, Jalisco, México. Registro PIMVS autorizado por SEMARNAT.</p>
-        <a href="admin.html" style="margin-top: 8px; display: inline-block;">Acceso Privado</a>
+        <a href="admin.html" style="margin-top: 4px; display: inline-block;">Acceso Privado</a>
       </div>
     </div>
   </footer>

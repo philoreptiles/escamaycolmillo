@@ -1,9 +1,7 @@
 /* ==========================================================================
    ESTILOS PRINCIPALES: ESCAMA Y COLMILLO
-   Diseño de Alta Gama / Herpetocultura de Selección
    ========================================================================== */
 
-/* Variables globales de diseño */
 :root {
   --color-negro: #0d0d0d;
   --color-negro-suave: #1a1a1a;
@@ -36,14 +34,14 @@ html, body {
   width: 90%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 30px 0;
+  padding: 20px 0 40px 0;
 }
 
 /* ENCABEZADO Y NAVEGACIÓN */
 .header {
   background-color: var(--color-blanco);
   border-bottom: 2px solid var(--color-verde-oscuro);
-  padding: 18px 4%;
+  padding: 14px 4%;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
   position: sticky;
   top: 0;
@@ -53,14 +51,45 @@ html, body {
 .header-container {
   max-width: 1280px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: 20px;
 }
 
-.nav-left {
+.logo-left {
+  text-align: left;
+}
+
+.logo-left h1 {
+  font-family: var(--fuente-titulos);
+  color: var(--color-negro);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.subtitulo-brand {
+  font-size: 0.72rem;
+  color: var(--color-verde-oscuro);
+  font-weight: 600;
+  letter-spacing: 1px;
+  display: block;
+  margin-top: 1px;
+  text-transform: uppercase;
+}
+
+.pimvs-tag {
+  font-size: 0.65rem;
+  color: var(--color-gris-texto);
+  letter-spacing: 0.5px;
+  display: block;
+}
+
+.nav-center {
   display: flex;
+  justify-content: center;
   gap: 12px;
 }
 
@@ -83,37 +112,6 @@ html, body {
   background-color: var(--color-verde-oscuro);
   color: var(--color-blanco);
   border-color: var(--color-verde-oscuro);
-}
-
-.logo-center {
-  text-align: center;
-}
-
-.logo-center h1, 
-.logo-center h2 {
-  font-family: var(--fuente-titulos);
-  color: var(--color-negro);
-  font-size: 1.7rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-.subtitulo-brand {
-  font-size: 0.75rem;
-  color: var(--color-verde-oscuro);
-  font-weight: 600;
-  letter-spacing: 1px;
-  display: block;
-  margin-top: 2px;
-  text-transform: uppercase;
-}
-
-.pimvs-tag {
-  font-size: 0.65rem;
-  color: var(--color-gris-texto);
-  letter-spacing: 0.5px;
-  display: block;
 }
 
 .nav-right {
@@ -142,39 +140,31 @@ html, body {
 /* BANNER PRINCIPAL (HERO) */
 .hero {
   text-align: center;
-  padding: 50px 20px;
+  padding: 35px 20px;
   background-color: var(--color-blanco);
   border-bottom: 1px solid var(--color-gris-borde);
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 
 .hero h1 {
   font-family: var(--fuente-titulos);
-  font-size: 2.2rem;
+  font-size: 2rem;
   color: var(--color-negro);
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   letter-spacing: 1px;
 }
 
 .hero p {
-  font-size: 0.98rem;
+  font-size: 0.95rem;
   color: var(--color-gris-texto);
   max-width: 720px;
   margin: 0 auto;
 }
 
-/* LAYOUT CON PANEL DE FILTROS */
-.layout-catalogo {
-  display: grid;
-  grid-template-columns: 270px 1fr;
-  gap: 30px;
-  align-items: start;
-}
-
-.sidebar-filtros {
-  position: sticky;
-  top: 100px;
-  z-index: 100;
+/* FILTROS CENTRADOS ARRIBA DE LAS FICHAS */
+.contenedor-filtros {
+  margin-bottom: 30px;
+  width: 100%;
 }
 
 .filtros-desplegable {
@@ -185,7 +175,7 @@ html, body {
 }
 
 .filtros-toggle {
-  padding: 16px 20px;
+  padding: 14px 20px;
   font-family: var(--fuente-titulos);
   font-weight: 700;
   font-size: 0.9rem;
@@ -216,16 +206,19 @@ html, body {
 
 .filtros-bar {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   gap: 16px;
-  padding: 20px;
+  padding: 18px 20px;
   border-top: 1px solid var(--color-gris-borde);
 }
 
 .filtro-grupo {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
+  min-width: 170px;
 }
 
 .filtro-grupo label {
@@ -240,7 +233,7 @@ html, body {
   background-color: var(--color-gris-fondo);
   color: var(--color-negro);
   border: 1px solid var(--color-gris-borde);
-  padding: 10px 12px;
+  padding: 8px 12px;
   border-radius: 4px;
   font-size: 0.85rem;
   font-weight: 500;
@@ -482,70 +475,14 @@ html, body {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* SECCIÓN NOSOTROS / INSTITUCIONAL */
-.nosotros-section {
-  max-width: 880px;
-  margin: 30px auto;
-  padding: 45px;
-  background-color: var(--color-blanco);
-  border-radius: 6px;
-  border: 1px solid var(--color-gris-borde);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-}
-
-.nosotros-section h2 {
-  text-align: center;
-  font-family: var(--fuente-titulos);
-  color: var(--color-negro);
-  font-size: 1.8rem;
-  margin-bottom: 20px;
-  letter-spacing: 1px;
-}
-
-.nosotros-section > p {
-  text-align: justify;
-  color: var(--color-gris-texto);
-  font-size: 1rem;
-  line-height: 1.7;
-  margin-bottom: 30px;
-}
-
-.nosotros-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.nosotros-card {
-  background-color: var(--color-gris-fondo);
-  border-left: 3px solid var(--color-verde-oscuro);
-  padding: 22px 25px;
-  border-radius: 4px;
-}
-
-.nosotros-card h3 {
-  font-family: var(--fuente-titulos);
-  margin-top: 0;
-  margin-bottom: 8px;
-  font-size: 1.1rem;
-  color: var(--color-negro);
-}
-
-.nosotros-card p {
-  margin: 0;
-  color: var(--color-gris-texto);
-  font-size: 0.92rem;
-  line-height: 1.6;
-}
-
-/* PIE DE PÁGINA (FOOTER) */
+/* PIE DE PÁGINA (FOOTER COMPACTO) */
 .main-footer {
   background-color: var(--color-negro);
   color: var(--color-blanco);
-  padding: 40px 0 25px 0;
-  margin-top: 60px;
+  padding: 20px 0 15px 0;
+  margin-top: 40px;
   border-top: 3px solid var(--color-verde-oscuro);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
 }
 
 .footer-container {
@@ -555,19 +492,19 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
   text-align: center;
 }
 
 .footer-brand h3 {
   font-family: var(--fuente-titulos);
-  font-size: 1.3rem;
-  letter-spacing: 2px;
+  font-size: 1.1rem;
+  letter-spacing: 1.5px;
 }
 
 .footer-links {
   display: flex;
-  gap: 20px;
+  gap: 18px;
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -585,10 +522,10 @@ html, body {
 
 .footer-bottom {
   color: var(--color-gris-texto);
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   border-top: 1px solid var(--color-negro-suave);
   width: 100%;
-  padding-top: 18px;
+  padding-top: 10px;
 }
 
 .footer-bottom a {
@@ -599,11 +536,13 @@ html, body {
 /* RESPONSIVO PARA DISPOSITIVOS MÓVILES */
 @media (max-width: 768px) {
   .header-container {
-    display: flex;
     flex-direction: column;
     gap: 12px;
   }
-  .nav-left {
+  .logo-left {
+    text-align: center;
+  }
+  .nav-center {
     width: 100%;
     justify-content: center;
   }
@@ -614,8 +553,12 @@ html, body {
     width: 100%;
     text-align: center;
   }
-  .layout-catalogo {
-    grid-template-columns: 1fr;
+  .filtros-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .filtro-grupo {
+    width: 100%;
   }
   .catalogo-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -631,8 +574,5 @@ html, body {
   .btn-card-wa {
     width: 100%;
     text-align: center;
-  }
-  .nosotros-section {
-    padding: 25px 20px;
   }
 }
