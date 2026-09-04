@@ -8,10 +8,13 @@
   <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-  <!-- Estilos -->
-  <link rel="stylesheet" href="styles.css" />
+  <!-- Estilos Exclusivos Admin -->
+  <link rel="stylesheet" href="admin-styles.css" />
 </head>
 <body>
 
@@ -19,10 +22,10 @@
     <div class="header-container">
       <div class="logo-center">
         <h2>Escama y Colmillo</h2>
-        <span class="pimvs-tag">PANEL DE ADMINISTRACIÓN PRIVADO</span>
+        <span class="pimvs-tag"><i class="fa-solid fa-shield-halved"></i> PANEL PRIVADO PIMVS</span>
       </div>
       <div class="nav-right">
-        <a href="index.html" class="nav-btn">Ver Catálogo Público</a>
+        <a href="index.html" class="nav-btn"><i class="fa-solid fa-store"></i> Ver Catálogo Público</a>
       </div>
     </div>
   </header>
@@ -30,25 +33,32 @@
   <main class="container">
 
     <!-- Inicio de Sesión -->
-    <section id="seccion-login" class="admin-wrapper">
-      <h2>Iniciar Sesión</h2>
+    <section id="seccion-login" class="admin-wrapper login-card">
+      <div class="login-header">
+        <i class="fa-solid fa-staff-snake login-icon"></i>
+        <h2>Acceso Administrativo</h2>
+        <p>Ingresa tus credenciales autorizadas</p>
+      </div>
       <form id="form-login">
-        <div class="admin-form-group" style="margin-bottom: 12px;">
-          <label for="login-email">Correo Electrónico</label>
+        <div class="admin-form-group">
+          <label for="login-email"><i class="fa-solid fa-envelope"></i> Correo Electrónico</label>
           <input type="email" id="login-email" class="admin-input" required placeholder="admin@escamaycolmillo.com" />
         </div>
         <div class="admin-form-group">
-          <label for="login-password">Contraseña</label>
+          <label for="login-password"><i class="fa-solid fa-lock"></i> Contraseña</label>
           <input type="password" id="login-password" class="admin-input" required placeholder="••••••••" />
         </div>
-        <button type="submit" class="btn-admin" id="btn-login">Acceder al Sistema</button>
+        <button type="submit" class="btn-admin" id="btn-login"><i class="fa-solid fa-right-to-bracket"></i> Acceder al Sistema</button>
         <div id="login-msg" class="mensaje-estado"></div>
       </form>
     </section>
 
     <!-- Registro de Ejemplares -->
     <section id="seccion-dashboard" class="admin-wrapper oculto">
-      <h2>Registrar Nuevo Ejemplar</h2>
+      <div class="card-header-bar">
+        <h2><i class="fa-solid fa-square-plus"></i> Registrar Nuevo Ejemplar</h2>
+        <button id="btn-cerrar-sesion" class="btn-admin btn-logout-top"><i class="fa-solid fa-power-off"></i> Salir</button>
+      </div>
 
       <form id="form-ejemplar">
         <div class="admin-form-grid">
@@ -78,9 +88,9 @@
           <div class="admin-form-group">
             <label for="sexo">Sexo</label>
             <select id="sexo" class="admin-input" required>
-              <option value="Macho">Macho</option>
-              <option value="Hembra">Hembra</option>
-              <option value="No sexado">No sexado</option>
+              <option value="Macho">Macho ♂</option>
+              <option value="Hembra">Hembra ♀</option>
+              <option value="No sexado">No sexado ⚥</option>
             </select>
           </div>
 
@@ -105,76 +115,124 @@
           </div>
 
           <div class="admin-form-group col-full">
-            <label for="foto">Fotografía</label>
-            <input type="file" id="foto" class="admin-input" accept="image/*" required />
+            <label for="foto">Fotografía Oficial</label>
+            <div class="file-drop-zone">
+              <input type="file" id="foto" class="admin-input-file" accept="image/*" required />
+              <span class="file-custom-label"><i class="fa-solid fa-cloud-arrow-up"></i> Seleccionar imagen del ejemplar</span>
+            </div>
           </div>
 
         </div>
 
-        <button type="submit" class="btn-admin" id="btn-guardar">Guardar Ejemplar</button>
+        <button type="submit" class="btn-admin btn-emerald" id="btn-guardar"><i class="fa-solid fa-floppy-disk"></i> Guardar Ejemplar</button>
         <div id="dashboard-msg" class="mensaje-estado"></div>
       </form>
-
-      <button id="btn-cerrar-sesion" class="btn-admin btn-logout">Cerrar Sesión</button>
     </section>
 
-    <!-- Lista de Inventario Privado -->
+    <!-- Lista de Inventario + Filtros -->
     <section id="seccion-inventario" class="admin-wrapper admin-wrapper-wide oculto">
-      <div class="inv-header-bar">
-        <button id="btn-toggle-vistas" class="btn-tab-toggle" onclick="toggleMostrarTodos()">Ver completo</button>
-        <h2>Inventario Registrado</h2>
-        <button class="btn-csv" onclick="descargarCSV()">Descargar CSV</button>
-      </div>
-
-      <div id="lista-inventario">
-        <p class="cargando">Cargando inventario...</p>
-      </div>
-    </section>
-
-    <!-- Panel de Estadísticas (nuevo) -->
-    <section id="seccion-estadisticas" class="admin-wrapper admin-wrapper-wide oculto">
-      <h2>Estadísticas del Inventario</h2>
-
-      <!-- Tarjetas resumen -->
-      <div class="stats-grid">
-        <div class="stat-card">
-          <span class="stat-label">Total ejemplares</span>
-          <span class="stat-number" id="stat-total">0</span>
+      
+      <!-- Dashboard Stats KPIs -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <span class="kpi-title">Total Registros</span>
+          <span class="kpi-value" id="kpi-total">0</span>
         </div>
-        <div class="stat-card">
-          <span class="stat-label">Disponibles</span>
-          <span class="stat-number" id="stat-disponibles">0</span>
+        <div class="kpi-card accent-green">
+          <span class="kpi-title">Disponibles</span>
+          <span class="kpi-value" id="kpi-disponibles">0</span>
         </div>
-        <div class="stat-card">
-          <span class="stat-label">Valor total</span>
-          <span class="stat-number" id="stat-valor">$0</span>
+        <div class="kpi-card accent-amber">
+          <span class="kpi-title">Apartados</span>
+          <span class="kpi-value" id="kpi-apartados">0</span>
         </div>
-        <div class="stat-card">
-          <span class="stat-label">Edad promedio</span>
-          <span class="stat-number" id="stat-edad">0 años</span>
+        <div class="kpi-card accent-blue">
+          <span class="kpi-title">Valor Activo (MXN)</span>
+          <span class="kpi-value" id="kpi-valor">$0</span>
         </div>
       </div>
 
-      <!-- Gráficos -->
-      <div class="charts-grid">
-        <div class="chart-box"><canvas id="chart-sexo"></canvas></div>
-        <div class="chart-box"><canvas id="chart-estatus"></canvas></div>
-        <div class="chart-box"><canvas id="chart-especies"></canvas></div>
-        <div class="chart-box"><canvas id="chart-anios"></canvas></div>
-        <div class="chart-box chart-full"><canvas id="chart-precios"></canvas></div>
+      <div class="inv-layout">
+        <div class="inv-list-col">
+          <div class="inv-header-bar">
+            <div class="inv-header-title">
+              <h2><i class="fa-solid fa-boxes-stacked"></i> Inventario</h2>
+            </div>
+            <div class="inv-header-actions">
+              <button id="btn-toggle-vistas" class="btn-tab-toggle" onclick="toggleMostrarTodos()">
+                <i class="fa-solid fa-eye"></i> Ver completo
+              </button>
+              <button class="btn-csv" onclick="descargarCSV()">
+                <i class="fa-solid fa-file-csv"></i> Exportar CSV
+              </button>
+            </div>
+          </div>
+          <div id="lista-inventario">
+            <p class="cargando"><i class="fa-solid fa-spinner fa-spin"></i> Cargando base de datos...</p>
+          </div>
+        </div>
+
+        <div class="inv-filters-col">
+          <h3><i class="fa-solid fa-filter"></i> Filtros</h3>
+          
+          <div class="filter-group">
+            <label>Especie</label>
+            <select id="filtro-especie" class="filter-select">
+              <option value="">Todas</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label>Sexo</label>
+            <select id="filtro-sexo" class="filter-select">
+              <option value="">Todos</option>
+              <option value="Macho">Macho</option>
+              <option value="Hembra">Hembra</option>
+              <option value="No sexado">No sexado</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label>Disponibilidad</label>
+            <select id="filtro-estatus" class="filter-select">
+              <option value="">Todos</option>
+              <option value="Disponible">Disponible</option>
+              <option value="Apartado">Apartado</option>
+              <option value="Vendido">Vendido</option>
+              <option value="Holdback">Holdback</option>
+            </select>
+          </div>
+
+          <div class="filter-group filter-range">
+            <label>Rango Precio (MXN)</label>
+            <div class="range-inputs">
+              <input type="number" id="filtro-precio-min" placeholder="Mín" min="0" />
+              <span>–</span>
+              <input type="number" id="filtro-precio-max" placeholder="Máx" min="0" />
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <label>Año Nacimiento</label>
+            <input type="number" id="filtro-anio" placeholder="Ej. 2024" min="2010" max="2030" />
+          </div>
+
+          <div class="filter-actions">
+            <button id="btn-aplicar-filtros" class="btn-filter"><i class="fa-solid fa-check"></i> Aplicar</button>
+            <button id="btn-limpiar-filtros" class="btn-filter btn-filter-clear"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+          </div>
+        </div>
       </div>
     </section>
 
   </main>
 
-  <footer style="text-align: center; padding: 30px 0; font-size: 0.8rem; color: #64748b;">
-    <p>&copy; Escama y Colmillo — Sistema Interno de Gestión de Inventario.</p>
+  <footer class="admin-footer">
+    <p>&copy; Escama y Colmillo — Plataforma de Gestión Herpetológica Privada.</p>
   </footer>
 
   <!-- Supabase CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <!-- Chart.js CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- Lógica -->
   <script src="admin.js"></script>
 
